@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1c17f0b-08d4-4803-9d49-d8441e36dc9d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/records/0925.txt" afterPath="$PROJECT_DIR$/records/0925.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sa/SASearch.java" afterPath="$PROJECT_DIR$/src/sa/SASearch.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,21 +14,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="SASearch.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SASearch.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sa/SASearch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+            <state relative-caret-position="101">
+              <caret line="38" column="11" lean-forward="true" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#921#922#0" expanded="true" />
-                <element signature="e#948#949#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="0925.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="0925.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/records/0925.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="429">
@@ -106,8 +104,8 @@
         <option value="$PROJECT_DIR$/src/greedy/TwoOptSearch.java" />
         <option value="$PROJECT_DIR$/src/main/Main.java" />
         <option value="$PROJECT_DIR$/src/sa/Cooling.java" />
-        <option value="$PROJECT_DIR$/src/sa/SASearch.java" />
         <option value="$PROJECT_DIR$/records/0925.txt" />
+        <option value="$PROJECT_DIR$/src/sa/SASearch.java" />
       </list>
     </option>
   </component>
@@ -343,12 +341,12 @@
       <workItem from="1506278276314" duration="5000" />
       <workItem from="1506303434737" duration="2865000" />
       <workItem from="1506314314013" duration="15751000" />
-      <workItem from="1506332416742" duration="6649000" />
+      <workItem from="1506332416742" duration="6877000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37558000" />
+    <option name="totallyTimeSpent" value="37786000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="49" width="2182" height="1402" extended-state="6" />
@@ -412,8 +410,6 @@
           <caret line="3" column="30" lean-forward="true" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#921#922#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -520,8 +516,6 @@
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#921#922#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -598,8 +592,6 @@
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#921#922#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -656,8 +648,6 @@
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#921#922#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -678,8 +668,6 @@
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#921#922#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -838,6 +826,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/records/0925.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="13" column="4" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sa/Cooling.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2541">
@@ -848,21 +844,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sa/SASearch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+        <state relative-caret-position="101">
+          <caret line="38" column="11" lean-forward="true" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#921#922#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/records/0925.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="13" column="4" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
