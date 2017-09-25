@@ -1,0 +1,24 @@
+일시 : 2017-09-21 강의 시간 中
+참석 : 권소현, 김태현, 윤준석, 최성욱
+보고사항
+    1. initial solution
+        - 윤 : 가로, 세로가 더 가까운 점을 찾아가는 Greedy (Test 필요)
+        - 최 : Cross하는 것이 후순위이게 선택하는 Greedy (Test 필요)
+
+    2. transform operation
+        - 권 : 2-opt 말고 CCA라는 것이 있던데 찾아보면 좋을듯 합니다.
+
+    3. simulated annealing
+        - 최 : 제한시간이 다가가면 갈수록 T가 낮아지는 폭을 더 크게하자 (Test 필요)
+        - 윤 : T의 초기값 여러번 시도해보고 경험적인 값을 쓰자
+
+    4. termination condition
+        - 윤 : 제한시간 30초 동안 계속 작동하게 하자
+        - 윤 : 값이 좋아지는 정도의 차이가 작을 때 멈추자
+        - 최 : 값이 어느정도 수렴했다고 판단이 되면 저장해놓았던 체크 포인트로 되돌아가 변경 op를 바꿔서 여러번 시도해보자.
+
+논의사항 :
+    권소현 : initial solution
+    김태현 : simulated annealing
+    윤준석 : simulated annealing, termination condition
+    최성욱 : transform operation
