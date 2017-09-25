@@ -1,12 +1,12 @@
 package util;
 
 public class Pick {
-    public static int[] getTwoRandomNumber(int min, int max) {
-        int first = (int) (Math.random() * max) + min;
-        int second = (int) (Math.random() * max) + min;
+    public static int[] getTwoRandomIndex(int lower, int higher) {
+        int first = getRandomInt(lower, higher);
+        int second = getRandomInt(lower, higher);
 
         while(first == second) {
-            second = (int) (Math.random() * max) + min;
+            second = getRandomInt(lower, higher);
         }
 
         int[] ret = new int[2];
@@ -14,5 +14,10 @@ public class Pick {
         ret[1] = Math.max(first, second);
 
         return ret;
+    }
+
+    public static int getRandomInt(int lower, int higher) {
+        int interval = higher - lower;
+        return (int) (Math.random() * (interval + 1)) + lower;
     }
 }

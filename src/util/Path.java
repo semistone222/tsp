@@ -22,7 +22,7 @@ public class Path {
      * @param higherIndex second edge'the former vertex index
      */
     public void twoOptSwap(int lowerIndex, int higherIndex) {
-        if(lowerIndex < 1 || higherIndex > order.length - 1) {
+        if(lowerIndex < 1 || higherIndex > order.length - 2) {
             System.out.println("======TWO OPT SWAP ERROR======");
             System.exit(1);
         }
@@ -82,6 +82,47 @@ public class Path {
         int[] ret = new int[2];
         ret[0] = Math.min(firstLongest.end, secondLongest.start);
         ret[1] = Math.max(firstLongest.end, secondLongest.start);
+
+        return ret;
+    }
+
+    public Edge getDistanceWeightedRandomEdge() {
+        double total = 0;
+        LinkedList<Edge> edgeList = new LinkedList<>();
+        for(int i = 0; i < order.length - 1; i++) {
+            Edge e = new Edge(order[i], order[i + 1], distanceMap[order[i]][order[i + 1]]);
+            edgeList.add(e);
+            total += e.distance;
+        }
+
+        int randomIndex = -1;
+        double random = Math.random() * total;
+        for(int i = 0; i < edgeList.size(); i++) {
+            random -= edgeList.get(i).distance;
+            if(random < 0.0d) {
+                randomIndex = i;
+                break;
+            }
+        }
+
+        return edgeList.get(randomIndex);
+    }
+
+    public int[] getTwoDistanceWeightedRandomIndex() {
+        Edge randomEdge1 = getDistanceWeightedRandomEdge();
+        Edge randomEdge2 = getDistanceWeightedRandomEdge();
+
+        while(randomEdge1.end == 0 || randomEdge1.end == order.length - 1 || randomEdge1.equals(randomEdge2)) {
+            randomEdge1 = getDistanceWeightedRandomEdge();
+        }
+
+        while(randomEdge2.start == 0 || randomEdge2.start == order.length - 1 || randomEdge1.equals(randomEdge2)) {
+            randomEdge2 = getDistanceWeightedRandomEdge();
+        }
+
+        int[] ret = new int[2];
+        ret[0] = Math.min(randomEdge1.end, randomEdge2.start);
+        ret[1] = Math.max(randomEdge1.end, randomEdge2.start);
 
         return ret;
     }

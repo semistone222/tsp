@@ -20,4 +20,10 @@ public class Edge implements Comparable<Edge> {
         }
         return 0;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Edge edge = (Edge) obj;
+        return (this.start == edge.start) && (this.end == edge.end) && (this.distance == edge.distance);
+    }
 }

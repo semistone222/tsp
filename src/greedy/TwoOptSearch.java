@@ -22,11 +22,19 @@ public class TwoOptSearch extends TSP {
     @Override
     public Path calculatePath(Path path) {
          // default 2-opt
-         return pickTwoRandomEdge(path);
+         // O(1)
+         // return pickTwoRandomEdge(path);
 
          // lower performance and even higher complexity(time) than pickTwoRandomEdge.
          // even if we lower complexity, performance will be poor.
+         // O(nlogn)
          // return pickTwoLongEdge(path);
+
+         // it seems to be slightly faster than default 2-opt.
+         // but, it is hard to say that this algorithm is better than default 2-opt.
+         // maybe, picking longer edge is not important.
+         // O(n)
+         return pickWeightedRandomEdge(path);
     }
 
     private Path pickTwoRandomEdge(Path path) {
@@ -36,7 +44,7 @@ public class TwoOptSearch extends TSP {
         while(trial < limitTrial) {
             Path trialPath = minPath.deepCopy();
 
-            int[] twoRandomNum = Pick.getTwoRandomNumber(1, numOfCities - 1);
+            int[] twoRandomNum = Pick.getTwoRandomIndex(1, numOfCities - 1);
             trialPath.twoOptSwap(twoRandomNum[0], twoRandomNum[1]);
 
             if(minPath.totalCost > trialPath.totalCost) {
@@ -72,9 +80,23 @@ public class TwoOptSearch extends TSP {
         return minPath;
     }
 
-    // TODO : Weighted Random Pick
-    // https://www.google.co.kr/search?q=java+weighted+random&oq=java+weighted+random&aqs=chrome..69i57j69i60l2j0l3.4539j0j7&sourceid=chrome&ie=UTF-8
     private Path pickWeightedRandomEdge(Path path) {
-        return null;
+        Path minPath = path.deepCopy();
+
+        int trial = 0;
+        while(trial < limitTrial) {
+            Path trialPath = minPath.deepCopy();
+            int[] index = trialPath.getTwoDistanceWeightedRandomIndex();
+            trialPath.twoOptSwap(index[0], index[1]);
+
+            if(minPath.totalCost > trialPath.totalCost) {
+                minPath = trialPath.deepCopy();
+            }
+
+            trial++;
+        }
+
+        return minPath;
+
     }
 }
