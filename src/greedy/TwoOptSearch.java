@@ -4,6 +4,8 @@ import util.Path;
 import util.Pick;
 import util.TSP;
 
+import java.util.Arrays;
+
 public class TwoOptSearch extends TSP {
 
     private int limitTrial;
@@ -21,28 +23,54 @@ public class TwoOptSearch extends TSP {
 
     @Override
     public Path calculatePath(Path path) {
-        return pickTwoRandomEdge(path);
+         return pickTwoRandomEdge(path);
+
+         // return pickTwoLongEdge(path);
+         // lower performance and even higher complexity(time) than pickTwoRandomEdge.
+         // even if we lower complexity, performance will be poor.
     }
 
     private Path pickTwoRandomEdge(Path path) {
         Path minPath = path.deepCopy();
+
         int trial = 0;
         while(trial < limitTrial) {
             Path trialPath = minPath.deepCopy();
+
             int[] twoRandomNum = Pick.getTwoRandomNumber(1, numOfCities - 1);
             trialPath.twoOptSwap(twoRandomNum[0], twoRandomNum[1]);
+
             if(minPath.totalCost > trialPath.totalCost) {
                 minPath = trialPath.deepCopy();
             }
+
             trial++;
         }
+
         return minPath;
     }
 
-    // TODO : 2 Long Edge Pick With Tabu Memory
-    // http://asuraiv.blogspot.kr/2015/11/java-priorityqueue.html
     private Path pickTwoLongEdge(Path path) {
-        return null;
+        Path minPath = path.deepCopy();
+
+        boolean[][] tried = new boolean[numOfCities + 1][numOfCities + 1];
+
+        int trial = 0;
+        while(trial < limitTrial) {
+            Path trialPath = minPath.deepCopy();
+            int[] index = trialPath.getTwoLongEdgeIndex(tried);
+            trialPath.twoOptSwap(index[0], index[1]);
+
+            if(minPath.totalCost > trialPath.totalCost) {
+                minPath = trialPath.deepCopy();
+                tried = new boolean[numOfCities + 1][numOfCities + 1];
+            } else {
+                tried[index[0]][index[1]] = true;
+            }
+            trial++;
+        }
+
+        return minPath;
     }
 
     // TODO : Weighted Random Pick

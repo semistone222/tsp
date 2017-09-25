@@ -1,5 +1,7 @@
 package util;
 
+import java.util.*;
+
 public class Path {
 
     private double[][] distanceMap;
@@ -43,6 +45,45 @@ public class Path {
         }
 
         order = newOrder;
+    }
+
+    public int[] getTwoLongEdgeIndex(boolean[][] tried) {
+        LinkedList<Edge> edgeList = new LinkedList<>();
+        for(int i = 0; i < order.length - 1; i++) {
+            Edge e = new Edge(order[i], order[i + 1], distanceMap[order[i]][order[i + 1]]);
+            edgeList.add(e);
+        }
+
+        Collections.sort(edgeList, new Comparator<Edge>() {
+            @Override
+            public int compare(Edge o1, Edge o2) {
+                if(o1.distance > o2.distance) {
+                    return -1;
+                } else if(o1.distance < o2.distance) {
+                    return 1;
+                }
+                return 0;
+            }
+        });
+
+        Edge firstLongest = edgeList.poll();
+        Edge secondLongest = edgeList.poll();
+
+        if(firstLongest == null || secondLongest == null ) {
+            System.out.println("======EDGE IS NOT ENOUGH======");
+            System.exit(1);
+        }
+
+        while(tried[firstLongest.end][secondLongest.start]) {
+            firstLongest = edgeList.poll();
+            secondLongest = edgeList.poll();
+        }
+
+        int[] ret = new int[2];
+        ret[0] = Math.min(firstLongest.end, secondLongest.start);
+        ret[1] = Math.max(firstLongest.end, secondLongest.start);
+
+        return ret;
     }
 
     public Path deepCopy() {

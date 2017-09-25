@@ -38,7 +38,8 @@ public class NearestNeighbor extends TSP {
             visited[indexOfNearestCity] = true;
         }
 
-        path.totalCost += distanceMap[path.order[numOfCities - 1]][path.order[numOfCities]];
+        double lastDistance = distanceMap[path.order[numOfCities - 1]][path.order[numOfCities]];
+        path.totalCost += lastDistance;
 
         return path;
     }
