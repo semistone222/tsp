@@ -33,6 +33,7 @@ public class SASearch extends TSP {
     public Path calculatePath(Path path) {
         int k = 0;
         Path minPath = path.deepCopy();
+        // TODO : stopping criteria (deltaTime < 30s) or (T > 0.1)
         while(T > 0.1) {
             for(int i = 0; i < numOfIteration; i++) {
                 Path trialPath = minPath.deepCopy();
@@ -45,9 +46,10 @@ public class SASearch extends TSP {
                     minPath = trialPath.deepCopy();
                 }
             }
-            T = Cooling.quadraticMultiplicativeCooling(T0, 2, k);
+            // TODO : decide cooling function
+            T = Cooling.quadraticMultiplicativeCooling(T0, 0.9, k);
             k++;
-            // delete this
+            // delete this, just for debug
             System.out.println("T,k,cost = (" + T + "," + k + "," + minPath.totalCost + ")");
         }
 
