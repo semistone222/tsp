@@ -5,11 +5,11 @@
     [] => 더 나은 솔루션
     // => 진행 중
 
-    1. 최 : 점이 많을 때는 (~1000) randomPath vs [greedyPath]
+    1. 최 : 점이 많을 때는 (~ 300) randomPath vs [greedyPath]
     2. 최 : 점이 적을 때는 (200 ~ 300) [randomPath] vs greedyPath
     3. 윤 : 확률가중치 2-opt vs [기존 2-opt]
     4. 윤 : 가장 긴 2개의 edge 2-opt vs [기존 2-opt]
-    // 5. 최 : 2-opt vs 3-opt
+    5. 최 : 2-opt vs [3-opt]
     // 6. 권 : 가장자리에서 시작한 greedy vs 무게중심점부터 시작한 greedy
     // 7. 권 : SA 이전에 초기해가 2-opt 십만번 vs 2-opt 1번
 
