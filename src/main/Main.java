@@ -8,7 +8,7 @@ import util.Path;
 public class Main {
     public static void main(String... args) {
         // read file
-        Map.setMapFile("data/36.txt");
+        Map.setMapFile("data/395.txt");
         Map map = Map.getInstance();
         map.printCityHashMap();
         map.printDistanceMap();

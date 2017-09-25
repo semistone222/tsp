@@ -37,6 +37,11 @@ public class TwoOptSearch extends TSP {
          // return pickWeightedRandomEdge(path);
     }
 
+    // TODO : apply tabu search to 2-opt
+    private Path pickTwoRandomEdgeWithTabu(Path path) {
+        return null;
+    }
+
     private Path pickTwoRandomEdge(Path path) {
         Path minPath = path.deepCopy();
 
@@ -57,6 +62,7 @@ public class TwoOptSearch extends TSP {
         return minPath;
     }
 
+    // something wrong with this method
     private Path pickTwoLongEdge(Path path) {
         Path minPath = path.deepCopy();
 
