@@ -23,7 +23,7 @@ public class TwoOptSearch extends TSP {
     public Path calculatePath(Path path) {
          // default 2-opt
          // O(1)
-         // return pickTwoRandomEdge(path);
+         return pickTwoRandomEdge(path);
 
          // lower performance and even higher complexity(time) than pickTwoRandomEdge.
          // even if we lower complexity, performance will be poor.
@@ -34,7 +34,7 @@ public class TwoOptSearch extends TSP {
          // but, it is hard to say that this algorithm is better than default 2-opt.
          // maybe, picking longer edge is not important.
          // O(n)
-         return pickWeightedRandomEdge(path);
+         // return pickWeightedRandomEdge(path);
     }
 
     private Path pickTwoRandomEdge(Path path) {
