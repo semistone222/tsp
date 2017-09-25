@@ -46,7 +46,7 @@ public class SASearch extends TSP {
                     minPath = trialPath.deepCopy();
                 }
             }
-            // TODO : decide cooling function
+            // TODO : decide cooling function and parameters
             T = Cooling.quadraticMultiplicativeCooling(T0, 0.9, k);
             k++;
             // delete this, just for debug

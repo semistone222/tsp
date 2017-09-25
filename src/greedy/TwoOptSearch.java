@@ -86,6 +86,7 @@ public class TwoOptSearch extends TSP {
         return minPath;
     }
 
+    // not good
     private Path pickWeightedRandomEdge(Path path) {
         Path minPath = path.deepCopy();
 
