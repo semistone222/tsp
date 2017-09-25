@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1c17f0b-08d4-4803-9d49-d8441e36dc9d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/greedy/TwoOptSearch.java" afterPath="$PROJECT_DIR$/src/greedy/TwoOptSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sa/SASearch.java" afterPath="$PROJECT_DIR$/src/sa/SASearch.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/util/Graphic.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,7 +14,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="TwoOptSearch.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TwoOptSearch.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/greedy/TwoOptSearch.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="594">
@@ -24,6 +22,16 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Graphic.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/util/Graphic.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="2" column="23" lean-forward="false" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -139,7 +147,6 @@
         <option value="$PROJECT_DIR$/src/util/City.java" />
         <option value="$PROJECT_DIR$/src/util/Result.java" />
         <option value="$PROJECT_DIR$/data/basic.txt" />
-        <option value="$PROJECT_DIR$/src/util/Graphic.java" />
         <option value="$PROJECT_DIR$/src/util/TSP.java" />
         <option value="$PROJECT_DIR$/src/util/Map.java" />
         <option value="$PROJECT_DIR$/src/greedy/NearestNeighbor.java" />
@@ -154,6 +161,7 @@
         <option value="$PROJECT_DIR$/src/main/Main.java" />
         <option value="$PROJECT_DIR$/src/sa/SASearch.java" />
         <option value="$PROJECT_DIR$/src/greedy/TwoOptSearch.java" />
+        <option value="$PROJECT_DIR$/src/util/Graphic.java" />
       </list>
     </option>
   </component>
@@ -390,12 +398,12 @@
       <workItem from="1506278276314" duration="5000" />
       <workItem from="1506303434737" duration="2865000" />
       <workItem from="1506314314013" duration="15751000" />
-      <workItem from="1506332416742" duration="10367000" />
+      <workItem from="1506332416742" duration="10433000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41276000" />
+    <option name="totallyTimeSpent" value="41342000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="49" width="2182" height="1402" extended-state="6" />
@@ -733,7 +741,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/Graphic.java" />
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_144/src.zip!/java/util/Collections.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1195">
@@ -899,6 +906,14 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/Graphic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="2" column="23" lean-forward="false" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
