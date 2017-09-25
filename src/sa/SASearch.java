@@ -2,28 +2,24 @@ package sa;
 
 import greedy.NearestNeighbor;
 import util.Path;
+import util.Pick;
 import util.TSP;
 
-// TODO : cooling function
 public class SASearch extends TSP {
 
     private final double T0;
-    private final double dT;
     private double T;
+    private int numOfIteration;
 
-    public SASearch(double T, double dT) {
-        if (T <= 0) {
-            System.out.println("======TEMPERATURE SHOULD BE BIGGER THAN 0======");
-            System.exit(1);
-        }
-        if (!(dT < 1 && dT > 0)) {
-            System.err.println("======DELTA SHOULD BE BETWEEN 0 to 1======");
+    public SASearch(double T0, int numOfIteration) {
+        if (T0 <= 0) {
+            System.out.println("======INITIAL TEMPERATURE SHOULD BE BIGGER THAN 0======");
             System.exit(1);
         }
 
-        this.T0 = T;
-        this.dT = dT;
-        this.T = T;
+        this.T0 = T0;
+        this.T = T0;
+        this.numOfIteration = numOfIteration;
     }
 
     @Override
@@ -35,20 +31,26 @@ public class SASearch extends TSP {
 
     @Override
     public Path calculatePath(Path path) {
-        // begin
-        // t <- 0, init T
-        // select a current point Vc at random
-        // evaluate Vc
-        // repeat
-        //      repeat
-        //          select the neighbor Vn From the neighborhood of Vc
-        //          if Vn is better than Vc then Vc <- Vn
-        //          else if random[0, 1) < e^(Diff/T) then Vc <- Vn
-        //      until(termination-condition)
-        //      T <- g(T, t)
-        //      t <- t + 1
-        // until(termination-condition)
-        // end
-        return null;
+        int k = 0;
+        Path minPath = path.deepCopy();
+        while(T > 0.1) {
+            for(int i = 0; i < numOfIteration; i++) {
+                Path trialPath = minPath.deepCopy();
+                int[] twoRandomNum = Pick.getTwoRandomIndex(1, numOfCities - 1);
+                trialPath.twoOptSwap(twoRandomNum[0], twoRandomNum[1]);
+
+                if(minPath.totalCost > trialPath.totalCost) {
+                    minPath = trialPath.deepCopy();
+                } else if (Math.random() < Math.pow(Math.E, (minPath.totalCost - trialPath.totalCost) / T)) {
+                    minPath = trialPath.deepCopy();
+                }
+            }
+            T = Cooling.quadraticMultiplicativeCooling(T0, 2, k);
+            k++;
+            // delete this
+            System.out.println("T,k,cost = (" + T + "," + k + "," + minPath.totalCost + ")");
+        }
+
+        return minPath;
     }
 }
