@@ -29,6 +29,5 @@ public class Main {
         Path path2 = twoOptSearch.calculatePath(1);
         path2.printOrder();
         path2.printTotalCost();
-
     }
 }
