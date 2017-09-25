@@ -45,6 +45,17 @@ public class Path {
         order = newOrder;
     }
 
+    public Path deepCopy() {
+        int[] copiedOrder = new int[order.length];
+        for(int i = 0; i < order.length; i++) {
+            copiedOrder[i] = order[i];
+        }
+
+        Path path = new Path(copiedOrder, totalCost);
+
+        return path;
+    }
+
     public void printOrder() {
         System.out.println("======PATH ORDER======");
         for(int i = 0; i < order.length; i++) {

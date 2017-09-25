@@ -25,10 +25,10 @@ public class Main {
         path.printTotalCost();
 
         // 2-opt test
-//        TwoOptSearch twoOptSearch = new TwoOptSearch(1000000);
-//        Path path2 = twoOptSearch.calculatePath(1);
-//        path2.printOrder();
-//        path2.printTotalCost();
+        TwoOptSearch twoOptSearch = new TwoOptSearch(1000000);
+        Path path2 = twoOptSearch.calculatePath(1);
+        path2.printOrder();
+        path2.printTotalCost();
 
     }
 }
