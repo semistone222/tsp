@@ -4,8 +4,6 @@ import util.Path;
 import util.Pick;
 import util.TSP;
 
-import java.util.Arrays;
-
 public class TwoOptSearch extends TSP {
 
     private int limitTrial;
@@ -23,11 +21,12 @@ public class TwoOptSearch extends TSP {
 
     @Override
     public Path calculatePath(Path path) {
+         // default 2-opt
          return pickTwoRandomEdge(path);
 
-         // return pickTwoLongEdge(path);
          // lower performance and even higher complexity(time) than pickTwoRandomEdge.
          // even if we lower complexity, performance will be poor.
+         // return pickTwoLongEdge(path);
     }
 
     private Path pickTwoRandomEdge(Path path) {
