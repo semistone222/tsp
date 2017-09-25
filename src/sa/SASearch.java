@@ -4,9 +4,8 @@ import greedy.NearestNeighbor;
 import util.Path;
 import util.TSP;
 
+// TODO : cooling function
 public class SASearch extends TSP {
-    // TODO : cooling function
-    // http://what-when-how.com/artificial-intelligence/a-comparison-of-cooling-schedules-for-simulated-annealing-artificial-intelligence/
 
     private final double T0;
     private final double dT;
