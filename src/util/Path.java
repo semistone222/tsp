@@ -150,4 +150,67 @@ public class Path {
         System.out.println("======TOTAL COST======");
         System.out.println(totalCost);
     }
+
+    public double refreshCost() {
+        double newCost = 0.0;
+        for(int i = 0; i < order.length - 1; i++) {
+            int a = order[i];
+            int b = order[i+1];
+            newCost += distanceMap[a][b];
+        }
+        if (Math.abs(totalCost - newCost) > 0.01) {
+            System.out.println("warning : cost auto refresh by float error");
+            totalCost = newCost;
+            return newCost;
+        }
+
+        return totalCost;
+    }
+
+    public void threeOptSwap(int indexA, int indexB, int indexC) {
+        if (indexC == Map.getInstance().getNumOfCities() + 1) {
+            System.err.println("threeOptSwap : OutOfIndexError");
+            System.exit(1);
+        }
+
+        Path [] seven = new Path[7];
+        /* type
+         * DEFAULT AB-1-CD-2-EF-3-GA
+         * 0 : ABCD[FE]GA
+         * 1 : AB[DC][FE]GA
+         * 2 : AB[DC]EFGA
+         *
+         * 3 : AB[FE][DC]GA
+         * 4 : AB[FE][CD]GA
+         * 5 : AB[EF][CD]GA
+         * 6 : AB[EF][DC]GA
+         */
+        seven[0] = this.deepCopy();                         // ABCDEFGA
+        seven[0].twoOptSwap(indexB + 1, indexC); // ABCDFEGA
+        seven[1] = seven[0].deepCopy();                     // ABCDFEGA
+        seven[1].twoOptSwap(indexA + 1, indexB); // ABDCFEGA
+        seven[2] = this.deepCopy();                         // ABCDEFGA
+        seven[2].twoOptSwap(indexA + 1, indexB); // ABDCEFGA
+
+        seven[3] = this.deepCopy();                         // ABCDEFGA
+        seven[3].twoOptSwap(indexA + 1, indexC); // ABFEDCGA
+        seven[4] = seven[3].deepCopy();                     // ABFEDCGA
+        seven[4].twoOptSwap(indexB + 1, indexC); // ABFECDGA
+        seven[5] = seven[4].deepCopy();                     // ABFECDGA
+        seven[5].twoOptSwap(indexA + 1, indexB); // ABEFCDGA
+        seven[6] = seven[3].deepCopy();                     // ABFEDCGA
+        seven[6].twoOptSwap(indexA + 1, indexB); // ABEFDCGA
+
+        double minCost = seven[0].totalCost;
+        int minIdx = 0;
+        for(int i = 1; i < 7; i++) {
+            if (minCost > seven[i].totalCost) {
+                minCost = seven[i].totalCost;
+                minIdx = i;
+            }
+        }
+
+        System.arraycopy(seven[minIdx].order, 0, order, 0, order.length);
+        totalCost = minCost;
+    }
 }

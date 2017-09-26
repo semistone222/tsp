@@ -1,6 +1,7 @@
 package main;
 
 import greedy.NearestNeighbor;
+import greedy.ThreeOptSearch;
 import greedy.TwoOptSearch;
 import sa.SASearch;
 import util.Map;
@@ -32,11 +33,16 @@ public class Main {
         path2.printOrder();
         path2.printTotalCost();
 
+        //ThreeOptSearch
+        ThreeOptSearch tos = new ThreeOptSearch(1000000000);
+        Path path4 = tos.calculatePath(0);
+        path4.printOrder();
+        path4.printTotalCost();
+
         // SASearch
         SASearch saSearch = new SASearch(90, 100000);
         Path path3 = saSearch.calculatePath(1);
         path3.printOrder();
         path3.printTotalCost();
-
     }
 }

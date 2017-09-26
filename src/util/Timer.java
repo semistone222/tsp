@@ -8,6 +8,9 @@ public class Timer {
     private final long LIMIT;
     private long startTime;
 
+    private double sec = 0.0;
+    private double delta = 1.0;
+
     public Timer(long limit) {
         this.LIMIT = limit;
     }
@@ -24,5 +27,15 @@ public class Timer {
     public long getExecutionSeconds() {
         long currentTime = System.currentTimeMillis();
         return (currentTime - startTime) / 1000;
+    }
+
+    public void tic() { startTime = System.currentTimeMillis(); }
+    public double toc() { return (System.currentTimeMillis() - startTime)/1000.0; }
+    public boolean tick() {
+        if (toc() > sec) {
+            sec += delta;
+            return true;
+        }
+        return false;
     }
 }
