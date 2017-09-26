@@ -47,7 +47,7 @@ public class Main {
         path3.printTotalCost();
 
         // TabuSearch
-        TabuSearch tabuSearch = new TabuSearch(10000 , 0.1);
+        TabuSearch tabuSearch = new TabuSearch(16 , 0.05);
         Path path5 = tabuSearch.calculatePath(1);
         path5.printOrder();
         path5.printTotalCost();

@@ -16,8 +16,8 @@ public class TabuSearch extends TSP {
     private int maxTabuSize;
     private Timer timer;
 
-    public TabuSearch(int numOfCandidates, double tabuSizeRatio) {
-        this.numOfCandidates = numOfCandidates;
+    public TabuSearch(double candidateRatio, double tabuSizeRatio) {
+        this.numOfCandidates = (int) (numOfCities * candidateRatio);
         this.tabuList = new LinkedList<>();
         this.maxTabuSize = (int) (numOfCities * tabuSizeRatio);
         this.timer = new Timer(Timer.FIRST_DEMO_LIMIT_SEC);
