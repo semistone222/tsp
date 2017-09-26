@@ -11,14 +11,12 @@ import java.util.*;
 public class TabuSearch extends TSP {
 
     private final int numOfCandidates;
-    // TODO : tabuClearSize, tabu
-    private final int tabuClearSize;
+    // TODO : tabu
     private int[][] tabu;
     private Timer timer;
 
-    public TabuSearch(int numOfCandidates, int tabuClearSize) {
+    public TabuSearch(int numOfCandidates) {
         this.numOfCandidates = numOfCandidates;
-        this.tabuClearSize = tabuClearSize;
         this.tabu = new int[numOfCities + 1][numOfCities + 1];
         this.timer = new Timer(Timer.FIRST_DEMO_LIMIT_SEC);
     }
@@ -57,17 +55,17 @@ public class TabuSearch extends TSP {
                 }
             });
 
-            Path bestPath = candidates.pollFirst();
+            Path trialPath = candidates.pollFirst();
 
-            if(!isTabu(bestPath)) {
-                minPath = bestPath.deepCopy();
-            } else if (isAspirationCriteriaFulfilled(minPath, bestPath)) {
-                minPath = bestPath.deepCopy();
+            if(!isTabu(trialPath)) {
+                minPath = trialPath.deepCopy();
+            } else if (isAspirationCriteriaFulfilled(minPath, trialPath)) {
+                minPath = trialPath.deepCopy();
             } else {
-                while(!isTabu(bestPath)) {
-                    bestPath = candidates.pollFirst();
+                while(!isTabu(trialPath)) {
+                    trialPath = candidates.pollFirst();
                 }
-                minPath = bestPath.deepCopy();
+                minPath = trialPath.deepCopy();
             }
 
             updateTabu();
