@@ -1,19 +1,20 @@
 package greedy;
 
-import util.Path;
-import util.Pick;
-import util.TSP;
+import util.*;
 
 public class TwoOptSearch extends TSP {
 
     private int limitTrial;
-
+    private Timer timer;
     public TwoOptSearch(int limitTrial) {
         this.limitTrial = limitTrial;
     }
 
     @Override
     public Path calculatePath(int startPoint) {
+        timer = new Timer(Timer.FIRST_DEMO_LIMIT_SEC);
+        timer.tic();
+
         NearestNeighbor nearestNeighbor = new NearestNeighbor();
         Path path = nearestNeighbor.calculatePath(startPoint);
         return calculatePath(path);
@@ -43,10 +44,12 @@ public class TwoOptSearch extends TSP {
     }
 
     private Path pickTwoRandomEdge(Path path) {
+        Memo memo = new Memo("twoOpt");
+
         Path minPath = path.deepCopy();
 
         int trial = 0;
-        while(trial < limitTrial) {
+        while(trial < limitTrial && !timer.isTimeGone()) {
             Path trialPath = minPath.deepCopy();
 
             int[] twoRandomNum = Pick.getTwoRandomIndex(1, numOfCities - 1);
@@ -57,8 +60,14 @@ public class TwoOptSearch extends TSP {
             }
 
             trial++;
+            if (timer.tick()) {
+                System.out.printf("iter(%6.2fM), timeDelta(%4.2f), cost(%5.2f)\n",
+                        trial / 1000000.0, timer.toc(), minPath.totalCost);
+                memo.doMemo((int)Math.round(minPath.totalCost));
+            }
         }
 
+        memo.saveMemo();
         return minPath;
     }
 
