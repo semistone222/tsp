@@ -1,7 +1,6 @@
 package sa;
 
 import greedy.NearestNeighbor;
-import main.Main;
 import util.Path;
 import util.Pick;
 import util.TSP;
