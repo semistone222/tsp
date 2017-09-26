@@ -11,6 +11,7 @@ public class Map {
 
     private int numOfCities;
     private double distanceMap[][];
+    private static int startPointID;
     private HashMap<Integer, City> cityHashMap;
 
     public static void setMapFile(String fileName) {
@@ -20,6 +21,9 @@ public class Map {
     public static Map getInstance() {
         return instance;
     }
+
+    // 중심점 찾기
+    public static int getStartPt(){return startPointID;}
 
     public int getNumOfCities() {
         return numOfCities;
@@ -40,6 +44,7 @@ public class Map {
 
     private void readMap(String fileName) {
         File file = new File(fileName);
+        int min_x, max_x, min_y=999999, max_y=0;
 
         try {
             Scanner sc = new Scanner(file);
@@ -49,6 +54,12 @@ public class Map {
                 int id = Integer.valueOf(strings[0]);
                 int x = Integer.valueOf(strings[1]);
                 int y = Integer.valueOf(strings[2]);
+                if(y<min_y){
+                    min_y = y;
+                }
+                if(y>max_y){
+                    max_y = y;
+                }
                 City city = new City(id, x, y);
                 cityHashMap.put(id, city);
             }
@@ -56,6 +67,16 @@ public class Map {
 
             numOfCities = cityHashMap.size();
             setDistanceMap();
+
+            // min,max x좌표 설정
+            min_x = cityHashMap.get(1).x;
+            max_x = cityHashMap.get(cityHashMap.size()).x;
+
+            // 무게중심 구하기
+            int temp_x, temp_y;
+            temp_x = (min_x + max_x)/2;
+            temp_y = (min_y + max_y)/2;
+            startPointID = getStartID(temp_x, temp_y);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -81,6 +102,20 @@ public class Map {
 
     private double calculateDistance(int x1, int y1, int x2, int y2) {
         return Math.hypot((double) (x1 - x2), (double) (y1 - y2));
+    }
+
+    private int getStartID(int temp_x, int temp_y){
+        int index = 0;
+        double temp;
+        double dist_min = calculateDistance(temp_x, temp_y, cityHashMap.get(1).x, cityHashMap.get(1).y);
+        for(int i=0; i<this.numOfCities; i++){
+            temp = calculateDistance(temp_x, temp_y, cityHashMap.get(i+1).x, cityHashMap.get(i+1).y);
+            if(dist_min>temp){
+                index = i+1;
+                dist_min=temp;
+            }
+        }
+        return index;
     }
 
     public void printCityHashMap() {
