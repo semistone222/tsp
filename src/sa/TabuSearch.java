@@ -1,6 +1,7 @@
 package sa;
 
 import greedy.NearestNeighbor;
+import javafx.util.Pair;
 import util.Path;
 import util.Pick;
 import util.TSP;
@@ -11,13 +12,14 @@ import java.util.*;
 public class TabuSearch extends TSP {
 
     private final int numOfCandidates;
-    // TODO : tabu
-    private int[][] tabu;
+    private Queue<Pair> tabuList;
+    private int maxTabuSize;
     private Timer timer;
 
-    public TabuSearch(int numOfCandidates) {
+    public TabuSearch(int numOfCandidates, double tabuSizeRatio) {
         this.numOfCandidates = numOfCandidates;
-        this.tabu = new int[numOfCities + 1][numOfCities + 1];
+        this.tabuList = new LinkedList<>();
+        this.maxTabuSize = (int) (numOfCities * tabuSizeRatio);
         this.timer = new Timer(Timer.FIRST_DEMO_LIMIT_SEC);
     }
 
@@ -31,60 +33,41 @@ public class TabuSearch extends TSP {
 
     @Override
     public Path calculatePath(Path path) {
-        Path minPath = path.deepCopy();
+        Path retPath = path.deepCopy();
 
         while(!timer.isTimeGone()) {
 
-            LinkedList<Path> candidates = new LinkedList<>();
+            ArrayList<Path> neighbors = new ArrayList<>();
             for(int i = 0; i < numOfCandidates; i++) {
-                Path candidate = minPath.deepCopy();
+                Path neighbor = retPath.deepCopy();
                 int[] twoRandomNum = Pick.getTwoRandomIndex(1, numOfCities - 1);
-                candidate.twoOptSwap(twoRandomNum[0], twoRandomNum[1]);
-                candidates.add(candidate);
+                neighbor.twoOptSwap(twoRandomNum[0], twoRandomNum[1]);
+                neighbors.add(neighbor);
             }
 
-            Collections.sort(candidates, new Comparator<Path>() {
-                @Override
-                public int compare(Path o1, Path o2) {
-                    if(o1.totalCost > o2.totalCost) {
-                        return 1;
-                    } else if (o1.totalCost < o2.totalCost) {
-                        return -1;
-                    }
-                    return 0;
+            Path bestPath = neighbors.get(0);
+            for(Path p : neighbors) {
+                if(!tabuList.contains(p.recentlySwappedPair) && bestPath.totalCost > p.totalCost) {
+                    bestPath = p.deepCopy();
                 }
-            });
-
-            Path trialPath = candidates.pollFirst();
-
-            if(!isTabu(trialPath)) {
-                minPath = trialPath.deepCopy();
-            } else if (isAspirationCriteriaFulfilled(minPath, trialPath)) {
-                minPath = trialPath.deepCopy();
-            } else {
-                while(!isTabu(trialPath)) {
-                    trialPath = candidates.pollFirst();
-                }
-                minPath = trialPath.deepCopy();
             }
 
-            updateTabu();
+            if(retPath.totalCost > bestPath.totalCost) {
+                retPath = bestPath.deepCopy();
+            }
+
+            tabuList.offer(bestPath.recentlySwappedPair);
+            if(tabuList.size() > maxTabuSize) {
+                tabuList.poll();
+            }
+
+            // delete this, just for debug
+            System.out.println(
+                    "time : " + timer.getExecutionSeconds() + "s, "
+                            + "cost : " + retPath.totalCost
+            );
         }
 
-        return minPath;
-    }
-
-    // TODO : updateTabu
-    private void updateTabu() {
-
-    }
-
-    // TODO : isTabu
-    private boolean isTabu(Path path) {
-        return true;
-    }
-
-    private boolean isAspirationCriteriaFulfilled(Path minPath, Path newPath) {
-        return minPath.totalCost > newPath.totalCost;
+        return retPath;
     }
 }

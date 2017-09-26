@@ -1,5 +1,7 @@
 package util;
 
+import javafx.util.Pair;
+
 import java.util.*;
 
 public class Path {
@@ -8,11 +10,20 @@ public class Path {
 
     public int[] order;
     public double totalCost;
+    public Pair<Integer, Integer> recentlySwappedPair;
 
     public Path(int[] order, double totalCost) {
         this.distanceMap = Map.getInstance().getDistanceMap();
         this.order = order;
         this.totalCost = totalCost;
+        this.recentlySwappedPair = new Pair<>(null, null);
+    }
+
+    public Path(int[] order, double totalCost, Pair<Integer, Integer> pair) {
+        this.distanceMap = Map.getInstance().getDistanceMap();
+        this.order = order;
+        this.totalCost = totalCost;
+        this.recentlySwappedPair = new Pair<>(pair.getKey(), pair.getValue());
     }
 
     /**
@@ -26,6 +37,8 @@ public class Path {
             System.out.println("======TWO OPT SWAP ERROR======");
             System.exit(1);
         }
+
+        recentlySwappedPair = new Pair<>(lowerIndex, higherIndex);
 
         totalCost -= distanceMap[order[lowerIndex - 1]][order[lowerIndex]];
         totalCost -= distanceMap[order[higherIndex]][order[higherIndex + 1]];
@@ -133,7 +146,7 @@ public class Path {
             copiedOrder[i] = order[i];
         }
 
-        Path path = new Path(copiedOrder, totalCost);
+        Path path = new Path(copiedOrder, totalCost, recentlySwappedPair);
 
         return path;
     }
