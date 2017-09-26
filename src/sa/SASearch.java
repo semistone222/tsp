@@ -10,7 +10,7 @@ public class SASearch extends TSP {
 
     private final double T0;
     private double T;
-    private int numOfIteration;
+    private final int numOfIteration;
     private Timer timer;
 
     public SASearch(double T0, int numOfIteration) {
@@ -35,7 +35,7 @@ public class SASearch extends TSP {
 
     @Override
     public Path calculatePath(Path path) {
-        int k = 0;
+        int n = 0, k = 0;
         Path minPath = path.deepCopy();
         while(!timer.isTimeGone() && T > 0.001) {
             for(int i = 0; i < numOfIteration; i++) {
@@ -48,13 +48,20 @@ public class SASearch extends TSP {
                 } else if (Math.random() < Math.pow(Math.E, (minPath.totalCost - trialPath.totalCost) / T)) {
                     minPath = trialPath.deepCopy();
                 }
+                n++;
             }
             // TODO : decide cooling function and parameters
             T = Cooling.quadraticMultiplicativeCooling(T0, 0.9, k);
             k++;
+
             // delete this, just for debug
-            timer.printExecutionTime();
-            System.out.println("T,k,cost = (" + T + "," + k + "," + minPath.totalCost + ")");
+            System.out.println(
+                    "time : " + timer.getExecutionSeconds() + "s, "
+                            + "n : " + n + ", "
+                            + "k : " + k + ", "
+                            + "T : " + T + ", "
+                            + "cost : " + minPath.totalCost
+            );
         }
 
         return minPath;

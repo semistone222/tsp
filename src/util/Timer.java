@@ -21,8 +21,8 @@ public class Timer {
         return (currentTime - startTime) > LIMIT;
     }
 
-    public void printExecutionTime() {
+    public long getExecutionSeconds() {
         long currentTime = System.currentTimeMillis();
-        System.out.println("======EXECUTION TIME====== " + (currentTime - startTime) / 1000 + "s");
+        return (currentTime - startTime) / 1000;
     }
 }
