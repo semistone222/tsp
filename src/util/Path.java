@@ -213,6 +213,4 @@ public class Path {
         System.arraycopy(seven[minIdx].order, 0, order, 0, order.length);
         totalCost = minCost;
     }
-
-
 }

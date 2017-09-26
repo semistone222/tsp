@@ -1,6 +1,7 @@
 package util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Pick {
     public static int[] getTwoRandomIndex(int lower, int higher) {
@@ -38,6 +39,7 @@ public class Pick {
             samples.remove(index);
         }
 
+        Arrays.sort(ret);
         return ret;
     }
 }

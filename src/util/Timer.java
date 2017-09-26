@@ -8,7 +8,6 @@ public class Timer {
     private final long LIMIT;
     private long startTime;
 
-    private double alert;
     private double sec = 0.0;
     private double delta = 1.0;
 
@@ -33,7 +32,7 @@ public class Timer {
     public void tic() { startTime = System.currentTimeMillis(); }
     public double toc() { return (System.currentTimeMillis() - startTime)/1000.0; }
     public boolean tick() {
-        if (toc() < sec) {
+        if (toc() > sec) {
             sec += delta;
             return true;
         }
