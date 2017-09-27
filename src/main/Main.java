@@ -1,6 +1,12 @@
 package main;
 
+import greedy.NearestNeighbor;
+import greedy.ThreeOptSearch;
+import greedy.TwoOptSearch;
+import our.DemoSearch;
 import our.OurSearch;
+import sa.SASearch;
+import sa.TabuSearch;
 import util.Map;
 import util.Path;
 
@@ -10,42 +16,48 @@ public class Main {
         // cf) 662's optimal tour = 2513
         Map.setMapFile("data/662.txt");
         Map map = Map.getInstance();
-        // map.printCityHashMap();
-        // map.printDistanceMap();
+        map.printCityHashMap();
+        map.printDistanceMap();
 
         // greedy test
-        // NearestNeighbor nearestNeighbor = new NearestNeighbor();
-        // Path path = nearestNeighbor.calculatePath(1);
-        // path.printOrder();
-        // path.printTotalCost();
+        NearestNeighbor nearestNeighbor = new NearestNeighbor();
+        Path path = nearestNeighbor.calculatePath(1);
+        path.printOrder();
+        path.printTotalCost();
 
         // 2-opt search test
-        // TwoOptSearch twoOptSearch = new TwoOptSearch(1000000);
-        // Path path2 = twoOptSearch.calculatePath(1);
-        // path2.printOrder();
-        // path2.printTotalCost();
+        TwoOptSearch twoOptSearch = new TwoOptSearch(1000000000);
+        Path path2 = twoOptSearch.calculatePath(1);
+        path2.printOrder();
+        path2.printTotalCost();
 
         // 3-opt search test
-        // ThreeOptSearch threeOptSearch = new ThreeOptSearch(1000000000);
-        // Path path3 = threeOptSearch.calculatePath(0);
-        // path3.printOrder();
-        // path3.printTotalCost();
+        ThreeOptSearch threeOptSearch = new ThreeOptSearch(1000000000);
+        Path path3 = threeOptSearch.calculatePath(1);
+        path3.printOrder();
+        path3.printTotalCost();
 
         // SASearch test
-        // SASearch saSearch = new SASearch(90, 100000);
-        // Path path4 = saSearch.calculatePath(1);
-        // path4.printOrder();
-        // path4.printTotalCost();
+        SASearch saSearch = new SASearch(90, 100000);
+        Path path4 = saSearch.calculatePath(1);
+        path4.printOrder();
+        path4.printTotalCost();
 
         // TabuSearch test
-        // TabuSearch tabuSearch = new TabuSearch(16 , 0.05);
-        // Path path5 = tabuSearch.calculatePath(1);
-        // path5.printOrder();
-        // path5.printTotalCost();
+        TabuSearch tabuSearch = new TabuSearch(16 , 0.05);
+        Path path5 = tabuSearch.calculatePath(1);
+        path5.printOrder();
+        path5.printTotalCost();
 
         // SA + Tabu test
         OurSearch ourSearch = new OurSearch();
         Path path6 = ourSearch.calculatePath(map.getCenterCityId());
         path6.printTotalCost();
+
+        // Demo Search test
+        DemoSearch demoSearch = new DemoSearch(100, 16, 0.05);
+        Path path7 = demoSearch.calculatePath(1);
+        path7.printTotalCost();
+
     }
 }
