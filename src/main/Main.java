@@ -1,11 +1,6 @@
 package main;
 
-import Our.OurSearch;
-import greedy.NearestNeighbor;
-import greedy.ThreeOptSearch;
-import greedy.TwoOptSearch;
-import sa.SASearch;
-import sa.TabuSearch;
+import our.OurSearch;
 import util.Map;
 import util.Path;
 

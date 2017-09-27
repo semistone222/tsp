@@ -1,7 +1,5 @@
-package Our;
+package our;
 
-import greedy.NearestNeighbor;
-import sa.Cooling;
 import util.*;
 
 public class OurSearch extends TSP {

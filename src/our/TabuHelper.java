@@ -1,7 +1,6 @@
-package Our;
+package our;
 
 import javafx.util.Pair;
-import sa.TabuSearch;
 import util.*;
 
 import java.util.ArrayList;
