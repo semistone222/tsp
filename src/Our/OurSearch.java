@@ -12,7 +12,7 @@ public class OurSearch extends TSP {
 
     public OurSearch() {
         TABU = new TabuHelper();
-        SA = new SAHelper(40, 0, 0.8);
+        SA = new SAHelper(20, 0, 0.8);
         timer = new Timer(Timer.FIRST_DEMO_LIMIT_SEC);
     }
     @Override
@@ -28,7 +28,6 @@ public class OurSearch extends TSP {
     public Path calculatePath(Path path) {
 
         Path startOptimalPath = path.deepCopy();
-        boolean bad = false;
         while(timer.toc() < 30.0) {
             SA.cooldown(7, timer.toc()/25.0);
             Path trial = TABU.Extract(startOptimalPath);
@@ -44,6 +43,7 @@ public class OurSearch extends TSP {
         startOptimalPath.refreshCost();
         // debug, delete this.
         startOptimalPath.printState();
+        startOptimalPath.write();
 
         new Chart(startOptimalPath);
         return startOptimalPath;
