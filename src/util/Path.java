@@ -34,7 +34,7 @@ public class Path {
      */
     public void twoOptSwap(int lowerIndex, int higherIndex) {
         if(lowerIndex < 1 || higherIndex > order.length - 2) {
-            System.out.println("======TWO OPT SWAP ERROR======");
+            System.err.println("======TWO OPT SWAP ERROR======");
             System.exit(1);
         }
 
@@ -83,7 +83,7 @@ public class Path {
         Edge secondLongest = edgeList.poll();
 
         if(firstLongest == null || secondLongest == null ) {
-            System.out.println("======EDGE IS NOT ENOUGH======");
+            System.err.println("======EDGE IS NOT ENOUGH======");
             System.exit(1);
         }
 
@@ -164,20 +164,15 @@ public class Path {
         System.out.println(totalCost);
     }
 
-    public double refreshCost() {
+    public void refreshCost() {
         double newCost = 0.0;
         for(int i = 0; i < order.length - 1; i++) {
             int a = order[i];
             int b = order[i+1];
             newCost += distanceMap[a][b];
         }
-        if (Math.abs(totalCost - newCost) > 0.01) {
-            System.out.println("warning : cost auto refresh by float error");
-            totalCost = newCost;
-            return newCost;
-        }
 
-        return totalCost;
+        totalCost = newCost;
     }
 
     public void threeOptSwap(int indexA, int indexB, int indexC) {
@@ -227,17 +222,50 @@ public class Path {
         totalCost = minCost;
     }
 
-    public void pathCheck() {
+    public PathState checkState() {
         boolean [] visited = new boolean[Map.getInstance().getNumOfCities() + 1];
-        if (order[0] != order[order.length - 1]) System.err.println("PathWrong : START != END");
+        if (order[0] != order[order.length - 1]) {
+            return PathState.NOT_THE_SAME_START_AS_END;
+        }
+
         visited[order[0]] = true;
 
-        for (int i = 1 ; i < order.length - 1; i++) {
-            if (visited[order[i]]) System.err.println("PathWrong : DOUBLEVISIT");
-            else visited[order[i]] = true;
+        for(int i = 1 ; i < order.length - 1; i++) {
+            if (visited[order[i]]) {
+                return PathState.VISITED_DUPLICATELY;
+            } else {
+                visited[order[i]] = true;
+            }
         }
+
         for(int i = 1; i < visited.length; i++) {
-            if (!visited[i]) System.err.println("PathWrong : NOTVISITED(" + i + ")");
+            if (!visited[i]) {
+                return PathState.NOT_ALL_VISITED;
+            }
         }
+
+        return PathState.GOOD;
+    }
+
+    public void printState() {
+        PathState pathState = checkState();
+        switch (pathState) {
+            case GOOD:
+                System.out.println("======PATH IS GOOD======");
+                break;
+            case NOT_THE_SAME_START_AS_END:
+                System.err.println("======PATH WRONG : START != END======");
+                break;
+            case VISITED_DUPLICATELY:
+                System.err.println("======PATH WRONG : VISITED DUPLICATELY======");
+                break;
+            case NOT_ALL_VISITED:
+                System.err.println("======PATH WRONG : NOT_ALL_VISITED======");
+                break;
+        }
+    }
+
+    public enum PathState {
+        GOOD, NOT_THE_SAME_START_AS_END, VISITED_DUPLICATELY, NOT_ALL_VISITED
     }
 }

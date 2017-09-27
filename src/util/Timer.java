@@ -29,8 +29,14 @@ public class Timer {
         return (currentTime - startTime) / 1000;
     }
 
-    public void tic() { startTime = System.currentTimeMillis(); }
-    public double toc() { return (System.currentTimeMillis() - startTime)/1000.0; }
+    public void tic() {
+        startTime = System.currentTimeMillis();
+    }
+
+    public double toc() {
+        return (System.currentTimeMillis() - startTime) / 1000.0;
+    }
+
     public boolean tick() {
         if (toc() > sec) {
             sec += delta;

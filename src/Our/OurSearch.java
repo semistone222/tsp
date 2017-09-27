@@ -4,8 +4,6 @@ import greedy.NearestNeighbor;
 import sa.Cooling;
 import util.*;
 
-import java.awt.*;
-
 public class OurSearch extends TSP {
 
     private TabuHelper TABU;
@@ -20,9 +18,9 @@ public class OurSearch extends TSP {
     @Override
     public Path calculatePath(int startPoint) {
         timer.start(System.currentTimeMillis());
-        NearestNeighbor nearestNeighbor = new NearestNeighbor();
-        Path path = nearestNeighbor.calculatePath(Map.getStartPt());
-//        Path path = RandomPath.getRandomPath(Map.getStartPt());
+        // NearestNeighbor nearestNeighbor = new NearestNeighbor();
+        // Path path = nearestNeighbor.calculatePath(startPoint);
+        Path path = RandomPath.getRandomPath(startPoint);
         return calculatePath(path);
     }
 
@@ -44,7 +42,8 @@ public class OurSearch extends TSP {
         }
 
         startOptimalPath.refreshCost();
-        startOptimalPath.pathCheck();
+        // debug, delete this.
+        startOptimalPath.printState();
 
         new Chart(startOptimalPath);
         return startOptimalPath;
