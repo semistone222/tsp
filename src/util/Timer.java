@@ -9,7 +9,7 @@ public class Timer {
     private long startTime;
 
     private double sec = 0.0;
-    private double delta = 1.0;
+    private double delta = 0.5;
 
     public Timer(long limit) {
         this.LIMIT = limit;
@@ -29,8 +29,14 @@ public class Timer {
         return (currentTime - startTime) / 1000;
     }
 
-    public void tic() { startTime = System.currentTimeMillis(); }
-    public double toc() { return (System.currentTimeMillis() - startTime)/1000.0; }
+    public void tic() {
+        startTime = System.currentTimeMillis();
+    }
+
+    public double toc() {
+        return (System.currentTimeMillis() - startTime) / 1000.0;
+    }
+
     public boolean tick() {
         if (toc() > sec) {
             sec += delta;
