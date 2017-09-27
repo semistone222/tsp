@@ -28,7 +28,7 @@ public class TwoOptSearch extends TSP {
          // lower performance and even higher complexity(time) than pickTwoRandomEdge.
          // even if we lower complexity, performance will be poor.
          // O(nlogn)
-         // return pickTwoLongEdge(path);
+         //return pickTwoLongEdge(path);
 
          // it seems to be slightly faster than default 2-opt.
          // but, it is hard to say that this algorithm is better than default 2-opt.
