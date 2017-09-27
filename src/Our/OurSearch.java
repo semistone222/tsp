@@ -13,11 +13,12 @@ public class OurSearch extends TSP {
     public OurSearch() {
         TABU = new TabuHelper();
         SA = new SAHelper(20, 0, 0.8);
-        timer = new Timer(Timer.FIRST_DEMO_LIMIT_SEC);
+        timer = new Timer();
     }
+
     @Override
     public Path calculatePath(int startPoint) {
-        timer.start(System.currentTimeMillis());
+        timer.tic();
         // NearestNeighbor nearestNeighbor = new NearestNeighbor();
         // Path path = nearestNeighbor.calculatePath(startPoint);
         Path path = RandomPath.getRandomPath(startPoint);
@@ -28,7 +29,7 @@ public class OurSearch extends TSP {
     public Path calculatePath(Path path) {
 
         Path startOptimalPath = path.deepCopy();
-        while(timer.toc() < 30.0) {
+        while(!timer.isOver(Timer.FIRST_DEMO_LIMIT_SEC)) {
             SA.cooldown(7, timer.toc()/25.0);
             Path trial = TABU.Extract(startOptimalPath);
 

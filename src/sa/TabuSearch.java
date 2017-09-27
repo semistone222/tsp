@@ -20,12 +20,12 @@ public class TabuSearch extends TSP {
         this.numOfCandidates = (int) (numOfCities * candidateRatio);
         this.tabuList = new LinkedList<>();
         this.maxTabuSize = (int) (numOfCities * tabuSizeRatio);
-        this.timer = new Timer(Timer.FIRST_DEMO_LIMIT_SEC);
+        this.timer = new Timer();
     }
 
     @Override
     public Path calculatePath(int startPoint) {
-        this.timer.start(System.currentTimeMillis());
+        this.timer.tic();
         NearestNeighbor nearestNeighbor = new NearestNeighbor();
         Path path = nearestNeighbor.calculatePath(startPoint);
         return calculatePath(path);
@@ -35,7 +35,7 @@ public class TabuSearch extends TSP {
     public Path calculatePath(Path path) {
         Path retPath = path.deepCopy();
 
-        while(!timer.isTimeGone()) {
+        while(!timer.isOver(Timer.FIRST_DEMO_LIMIT_SEC)) {
 
             ArrayList<Path> neighbors = new ArrayList<>();
             for(int i = 0; i < numOfCandidates; i++) {
@@ -62,10 +62,12 @@ public class TabuSearch extends TSP {
             }
 
             // delete this, just for debug
-            System.out.println(
-                    "time : " + timer.getExecutionSeconds() + "s, "
-                            + "cost : " + retPath.totalCost
-            );
+            if (timer.tick()) {
+                System.out.println(
+                        "time : " + timer.toc() + "s, "
+                                + "cost : " + retPath.totalCost
+                );
+            }
         }
 
         return retPath;

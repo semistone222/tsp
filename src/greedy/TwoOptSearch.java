@@ -6,13 +6,14 @@ public class TwoOptSearch extends TSP {
 
     private int limitTrial;
     private Timer timer;
+
     public TwoOptSearch(int limitTrial) {
         this.limitTrial = limitTrial;
+        this.timer = new Timer();
     }
 
     @Override
     public Path calculatePath(int startPoint) {
-        timer = new Timer(Timer.FIRST_DEMO_LIMIT_SEC);
         timer.tic();
 
         NearestNeighbor nearestNeighbor = new NearestNeighbor();
@@ -38,18 +39,13 @@ public class TwoOptSearch extends TSP {
          // return pickWeightedRandomEdge(path);
     }
 
-    // TODO : apply tabu search to 2-opt
-    private Path pickTwoRandomEdgeWithTabu(Path path) {
-        return null;
-    }
-
     private Path pickTwoRandomEdge(Path path) {
         Memo memo = new Memo("twoOpt");
 
         Path minPath = path.deepCopy();
 
         int trial = 0;
-        while(trial < limitTrial && !timer.isTimeGone()) {
+        while(trial < limitTrial && !timer.isOver(Timer.FIRST_DEMO_LIMIT_SEC)) {
             Path trialPath = minPath.deepCopy();
 
             int[] twoRandomNum = Pick.getTwoRandomIndex(1, numOfCities - 1);

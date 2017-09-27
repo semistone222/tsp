@@ -19,12 +19,12 @@ public class SASearch extends TSP {
         this.T0 = T0;
         this.T = T0;
         this.numOfIteration = numOfIteration;
-        this.timer = new Timer(Timer.FIRST_DEMO_LIMIT_SEC);
+        this.timer = new Timer();
     }
 
     @Override
     public Path calculatePath(int startPoint) {
-        this.timer.start(System.currentTimeMillis());
+        timer.tic();
         NearestNeighbor nearestNeighbor = new NearestNeighbor();
         Path path = nearestNeighbor.calculatePath(startPoint);
         return calculatePath(path);
@@ -44,16 +44,16 @@ public class SASearch extends TSP {
         bestPath = path.deepCopy();
         savePath = path.deepCopy();
 
-        while(!timer.isTimeGone()) {
+        while(!timer.isOver(Timer.FIRST_DEMO_LIMIT_SEC)) {
 
-            //ÃÖÀú¿¡¼­ ¾Æ¹«°Å³ª ¹Ù²ãº»´Ù <min¿¡¼­ rand »ı¼º!>
+            //ìµœì €ì—ì„œ ì•„ë¬´ê±°ë‚˜ ë°”ê¿”ë³¸ë‹¤ <minì—ì„œ rand ìƒì„±!>
             RandPath = minPath.deepCopy();
             for(int i = 0 ; i < 3; i++) {
                 randNums = Pick.randNums(3, numOfCities);
                 RandPath.threeOptSwap(randNums[0], randNums[1], randNums[2]);
             }
 
-            //¹Ù²Û °ªÀ» ¿­½ÉÈ÷ ÃÖÀûÈ­ ÇØº»´Ù <trial·Î rand¸¦ ¿­½ÉÈ÷ ÃÖÀûÈ­!>
+            //ë°”ê¾¼ ê°’ì„ ì—´ì‹¬íˆ ìµœì í™” í•´ë³¸ë‹¤ <trialë¡œ randë¥¼ ì—´ì‹¬íˆ ìµœì í™”!>
             for (int i = 0; i < numOfIteration; i++) {
                 trialPath = RandPath.deepCopy();
                 randNums = Pick.randNums(3, numOfCities);
@@ -67,19 +67,19 @@ public class SASearch extends TSP {
                     System.out.printf("iter(%6.2fM), timeDelta(%4.2f), cost(%5.2f) T(%3.2f)\n",
                             iter / 1000000.0, timer.toc(), RandPath.totalCost, T);
                 }
-                if (timer.isTimeGone()) break;
+                if (timer.isOver(Timer.FIRST_DEMO_LIMIT_SEC)) break;
             }
 
-            //¾î´ÀÁ¤µµ ÃÖÀûÈ­ (local optima¿¡ Á¢±ÙÇß´Ù°í °¡Á¤ÇÑ´Ù) °¡ µÇ¾ú´Ù°í Ä¡°í ºñ±³ÇÏÀÚ
-            //±×·³ global ÃÖÀûÇØ¿Í rand¸¦ ºñ±³ÇÑ´Ù
+            //ì–´ëŠì •ë„ ìµœì í™” (local optimaì— ì ‘ê·¼í–ˆë‹¤ê³  ê°€ì •í•œë‹¤) ê°€ ë˜ì—ˆë‹¤ê³  ì¹˜ê³  ë¹„êµí•˜ì
+            //ê·¸ëŸ¼ global ìµœì í•´ì™€ randë¥¼ ë¹„êµí•œë‹¤
             if (minPath.totalCost > RandPath.totalCost) {
-                minPath = RandPath.deepCopy(); // ´õ ÁÁÀ¸¸é °¡¾ßÁö (´ÙÀ½Ãâ¹ß°ª)
+                minPath = RandPath.deepCopy(); // ë” ì¢‹ìœ¼ë©´ ê°€ì•¼ì§€ (ë‹¤ìŒì¶œë°œê°’)
             }
             else {
-                //±Ùµ¥ ¾ÈÁÁÀ¸¸é?
+                //ê·¼ë° ì•ˆì¢‹ìœ¼ë©´?
                 double criteria = Math.pow(Math.E, (minPath.totalCost - RandPath.totalCost)/T);
                 if (Math.random() < criteria) {
-                    minPath = RandPath.deepCopy(); // ³ª»Û°ªÀÌ¶óµµ ¹Ş¾Æµé¿©º¼±î
+                    minPath = RandPath.deepCopy(); // ë‚˜ìœê°’ì´ë¼ë„ ë°›ì•„ë“¤ì—¬ë³¼ê¹Œ
                     System.out.println("accpet");
                 }
                 else {

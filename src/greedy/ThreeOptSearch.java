@@ -3,16 +3,17 @@ package greedy;
 import util.*;
 
 public class ThreeOptSearch extends TSP {
-    private  int limitTrial;
+
+    private int limitTrial;
     private Timer timer;
 
-    public ThreeOptSearch(){ limitTrial = 1000000000; }
-    public ThreeOptSearch(int _limit) { limitTrial = _limit; }
+    public ThreeOptSearch(int _limit) {
+        limitTrial = _limit;
+        timer = new Timer();
+    }
 
     @Override public Path calculatePath(int startPoint) {
-        timer = new Timer(Timer.FIRST_DEMO_LIMIT_SEC);
         timer.tic();
-
         NearestNeighbor nearestNeighbor = new NearestNeighbor();
         Path path = nearestNeighbor.calculatePath(startPoint);
         return calculatePath(path);
@@ -29,7 +30,7 @@ public class ThreeOptSearch extends TSP {
         Path trialPath;
 
         int trial = 0;
-        while(trial < limitTrial && !timer.isTimeGone()) {
+        while(trial < limitTrial && !timer.isOver(Timer.FIRST_DEMO_LIMIT_SEC)) {
             trialPath = minPath.deepCopy();
 
             int [] randNums = Pick.randNums(3, numOfCities );
