@@ -9,7 +9,7 @@ public class Timer {
     private long startTime;
 
     private double sec = 0.0;
-    private double delta = 1.0;
+    private double delta = 0.5;
 
     public Timer(long limit) {
         this.LIMIT = limit;

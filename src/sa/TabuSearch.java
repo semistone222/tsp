@@ -6,6 +6,7 @@ import util.Path;
 import util.Pick;
 import util.TSP;
 import util.Timer;
+import util.Map;
 
 import java.util.*;
 
@@ -27,7 +28,7 @@ public class TabuSearch extends TSP {
     public Path calculatePath(int startPoint) {
         this.timer.start(System.currentTimeMillis());
         NearestNeighbor nearestNeighbor = new NearestNeighbor();
-        Path path = nearestNeighbor.calculatePath(startPoint);
+        Path path = nearestNeighbor.calculatePath(Map.getStartPt());
         return calculatePath(path);
     }
 

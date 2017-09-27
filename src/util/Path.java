@@ -226,4 +226,18 @@ public class Path {
         System.arraycopy(seven[minIdx].order, 0, order, 0, order.length);
         totalCost = minCost;
     }
+
+    public void pathCheck() {
+        boolean [] visited = new boolean[Map.getInstance().getNumOfCities() + 1];
+        if (order[0] != order[order.length - 1]) System.err.println("PathWrong : START != END");
+        visited[order[0]] = true;
+
+        for (int i = 1 ; i < order.length - 1; i++) {
+            if (visited[order[i]]) System.err.println("PathWrong : DOUBLEVISIT");
+            else visited[order[i]] = true;
+        }
+        for(int i = 1; i < visited.length; i++) {
+            if (!visited[i]) System.err.println("PathWrong : NOTVISITED(" + i + ")");
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package main;
 
+import Our.OurSearch;
 import greedy.NearestNeighbor;
 import greedy.ThreeOptSearch;
 import greedy.TwoOptSearch;
@@ -51,5 +52,10 @@ public class Main {
         Path path5 = tabuSearch.calculatePath(1);
         path5.printOrder();
         path5.printTotalCost();
+
+        //SA + TABU
+        OurSearch ourSearch = new OurSearch();
+        Path p = ourSearch.calculatePath(0);
+        p.printTotalCost();
     }
 }
