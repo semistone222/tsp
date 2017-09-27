@@ -4,6 +4,7 @@ import greedy.NearestNeighbor;
 import greedy.ThreeOptSearch;
 import greedy.TwoOptSearch;
 import sa.SASearch;
+import sa.TabuSearch;
 import util.Map;
 import util.Path;
 
@@ -44,5 +45,11 @@ public class Main {
         Path path3 = saSearch.calculatePath(1);
         path3.printOrder();
         path3.printTotalCost();
+
+        // TabuSearch
+        TabuSearch tabuSearch = new TabuSearch(16 , 0.05);
+        Path path5 = tabuSearch.calculatePath(1);
+        path5.printOrder();
+        path5.printTotalCost();
     }
 }
