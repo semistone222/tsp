@@ -14,7 +14,7 @@ public class Main {
         // read file
         // cf) 662's optimal tour = 2513
         Map.setMapFile("data/662.txt");
-        // Map map = Map.getInstance();
+        Map map = Map.getInstance();
         // map.printCityHashMap();
         // map.printDistanceMap();
 
@@ -50,7 +50,7 @@ public class Main {
 
         // SA + Tabu test
         OurSearch ourSearch = new OurSearch();
-        Path path6 = ourSearch.calculatePath(Map.getStartPt());
+        Path path6 = ourSearch.calculatePath(map.getCenterCityId());
         path6.printTotalCost();
     }
 }

@@ -11,7 +11,7 @@ public class Map {
 
     private int numOfCities;
     private double distanceMap[][];
-    private static int startPointID;
+    private int centerCityId;
     private HashMap<Integer, City> cityHashMap;
 
     public static void setMapFile(String fileName) {
@@ -22,15 +22,16 @@ public class Map {
         return instance;
     }
 
-    // 중심점 찾기
-    public static int getStartPt(){return startPointID;}
-
     public int getNumOfCities() {
         return numOfCities;
     }
 
     public double[][] getDistanceMap() {
         return distanceMap;
+    }
+
+    public int getCenterCityId(){
+        return centerCityId;
     }
 
     public HashMap<Integer, City> getCityHashMap() {
@@ -44,7 +45,7 @@ public class Map {
 
     private void readMap(String fileName) {
         File file = new File(fileName);
-        int min_x, max_x, min_y=999999, max_y=0;
+        int minX, maxX, minY = Integer.MAX_VALUE, maxY = Integer.MIN_VALUE;
 
         try {
             Scanner sc = new Scanner(file);
@@ -54,29 +55,25 @@ public class Map {
                 int id = Integer.valueOf(strings[0]);
                 int x = Integer.valueOf(strings[1]);
                 int y = Integer.valueOf(strings[2]);
-                if(y<min_y){
-                    min_y = y;
-                }
-                if(y>max_y){
-                    max_y = y;
-                }
                 City city = new City(id, x, y);
                 cityHashMap.put(id, city);
+
+                if(y < minY){
+                    minY = y;
+                }
+
+                if(y > maxY){
+                    maxY = y;
+                }
             }
             sc.close();
 
             numOfCities = cityHashMap.size();
             setDistanceMap();
 
-            // min,max x좌표 설정
-            min_x = cityHashMap.get(1).x;
-            max_x = cityHashMap.get(cityHashMap.size()).x;
-
-            // 무게중심 구하기
-            int temp_x, temp_y;
-            temp_x = (min_x + max_x)/2;
-            temp_y = (min_y + max_y)/2;
-            startPointID = getStartID(temp_x, temp_y);
+            minX = cityHashMap.get(1).x;
+            maxX = cityHashMap.get(cityHashMap.size()).x;
+            setCenterCityId(minX, maxX, minY, maxY);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -104,18 +101,25 @@ public class Map {
         return Math.hypot((double) (x1 - x2), (double) (y1 - y2));
     }
 
-    private int getStartID(int temp_x, int temp_y){
-        int index = 0;
-        double temp;
-        double dist_min = calculateDistance(temp_x, temp_y, cityHashMap.get(1).x, cityHashMap.get(1).y);
-        for(int i=0; i<this.numOfCities; i++){
-            temp = calculateDistance(temp_x, temp_y, cityHashMap.get(i+1).x, cityHashMap.get(i+1).y);
-            if(dist_min>temp){
-                index = i+1;
-                dist_min=temp;
+    private void setCenterCityId(int minX, int maxX, int minY, int maxY) {
+        int tempX = (minX + maxX) / 2;
+        int tempY = (minY + maxY) / 2;
+        centerCityId = getClosestCityIndex(tempX, tempY);
+    }
+
+    private int getClosestCityIndex(int fromX, int fromY){
+        int minIndex = 0;
+        double minDist = Double.MAX_VALUE;
+        for(int i = 1; i <= this.numOfCities; i++){
+            City city = cityHashMap.get(i);
+            double dist = calculateDistance(fromX, fromY, city.x, city.y);
+            if(minDist > dist){
+                minIndex = i;
+                minDist = dist;
             }
         }
-        return index;
+
+        return minIndex;
     }
 
     public void printCityHashMap() {
