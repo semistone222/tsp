@@ -8,12 +8,13 @@ import sa.SASearch;
 import sa.TabuSearch;
 import util.Map;
 import util.Path;
+import util.Chart;
 
 public class Main {
     public static void main(String... args) {
         // read file
         // cf) 662's optimal tour = 2513
-        Map.setMapFile("data/662.txt");
+        Map.setMapFile("data/131.txt");
         Map map = Map.getInstance();
         // map.printCityHashMap();
         // map.printDistanceMap();
@@ -25,16 +26,17 @@ public class Main {
         // path.printTotalCost();
 
         // 2-opt search test
-        // TwoOptSearch twoOptSearch = new TwoOptSearch(1000000);
-        // Path path2 = twoOptSearch.calculatePath(1);
+        // TwoOptSearch twoOptSearch = new TwoOptSearch(1000000000);
+        // Path path2 = twoOptSearch.calculatePath(map.getCenterCityId());
         // path2.printOrder();
         // path2.printTotalCost();
 
         // 3-opt search test
         // ThreeOptSearch threeOptSearch = new ThreeOptSearch(1000000000);
-        // Path path3 = threeOptSearch.calculatePath(0);
+        // Path path3 = threeOptSearch.calculatePath(map.getCenterCityId());
         // path3.printOrder();
         // path3.printTotalCost();
+        //new Chart(path3);
 
         // SASearch test
         // SASearch saSearch = new SASearch(90, 100000);
@@ -44,7 +46,7 @@ public class Main {
 
         // TabuSearch test
         // TabuSearch tabuSearch = new TabuSearch(16 , 0.05);
-        // Path path5 = tabuSearch.calculatePath(1);
+        // Path path5 = tabuSearch.calculatePath(map.getCenterCityId());
         // path5.printOrder();
         // path5.printTotalCost();
 

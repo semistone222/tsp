@@ -1,5 +1,6 @@
 package greedy;
 
+import Our.RandomPath;
 import util.*;
 
 public class ThreeOptSearch extends TSP {
@@ -15,6 +16,7 @@ public class ThreeOptSearch extends TSP {
 
         NearestNeighbor nearestNeighbor = new NearestNeighbor();
         Path path = nearestNeighbor.calculatePath(startPoint);
+        // Path path = RandomPath.getRandomPath(startPoint);
         return calculatePath(path);
     }
 
@@ -23,7 +25,7 @@ public class ThreeOptSearch extends TSP {
     }
 
     private Path threeOptSearch (Path path) {
-        Memo memo = new Memo("treeOptSearch");
+        Memo memo = new Memo("treeOpt");
 
         Path minPath = path.deepCopy();
         Path trialPath;

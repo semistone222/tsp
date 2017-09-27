@@ -1,5 +1,6 @@
 package greedy;
 
+import Our.RandomPath;
 import util.*;
 
 public class TwoOptSearch extends TSP {
@@ -15,8 +16,9 @@ public class TwoOptSearch extends TSP {
         timer = new Timer(Timer.FIRST_DEMO_LIMIT_SEC);
         timer.tic();
 
-        NearestNeighbor nearestNeighbor = new NearestNeighbor();
-        Path path = nearestNeighbor.calculatePath(startPoint);
+        // NearestNeighbor nearestNeighbor = new NearestNeighbor();
+        // Path path = nearestNeighbor.calculatePath(startPoint);
+        Path path = RandomPath.getRandomPath(startPoint);
         return calculatePath(path);
     }
 

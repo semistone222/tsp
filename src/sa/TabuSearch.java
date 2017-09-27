@@ -1,11 +1,13 @@
 package sa;
 
+import Our.RandomPath;
 import greedy.NearestNeighbor;
 import javafx.util.Pair;
 import util.Path;
 import util.Pick;
 import util.TSP;
 import util.Timer;
+import util.Memo;
 
 import java.util.*;
 
@@ -26,14 +28,16 @@ public class TabuSearch extends TSP {
     @Override
     public Path calculatePath(int startPoint) {
         this.timer.start(System.currentTimeMillis());
-        NearestNeighbor nearestNeighbor = new NearestNeighbor();
-        Path path = nearestNeighbor.calculatePath(startPoint);
+        // NearestNeighbor nearestNeighbor = new NearestNeighbor();
+        // Path path = nearestNeighbor.calculatePath(startPoint);
+        Path path = RandomPath.getRandomPath(startPoint);
         return calculatePath(path);
     }
 
     @Override
     public Path calculatePath(Path path) {
         Path retPath = path.deepCopy();
+        Memo memo = new Memo("Tabu");
 
         while(!timer.isTimeGone()) {
 
@@ -62,12 +66,19 @@ public class TabuSearch extends TSP {
             }
 
             // delete this, just for debug
-            System.out.println(
+            if (false) System.out.println(
                     "time : " + timer.getExecutionSeconds() + "s, "
                             + "cost : " + retPath.totalCost
             );
+
+            if (timer.tick()){
+                System.out.printf("iter(%6.2fM), timeDelta(%4.2f), cost(%5.2f)\n",
+                        0.0, timer.toc(), retPath.totalCost);
+                memo.doMemo((int)Math.round(retPath.totalCost));
+            }
         }
 
+        memo.saveMemo();
         return retPath;
     }
 }
