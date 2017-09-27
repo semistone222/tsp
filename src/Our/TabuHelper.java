@@ -17,7 +17,7 @@ public class TabuHelper {
 
     public TabuHelper() {
         numOfCities = Map.getInstance().getNumOfCities();
-        tabuSizeRatio = 0.1;
+        tabuSizeRatio = 0.3;
         candidates = (int) (tabuSizeRatio * numOfCities);
         maxTabuSize = 80;
         tabuList = new LinkedList<>();

@@ -2,6 +2,10 @@ package util;
 
 import javafx.util.Pair;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Path {
@@ -267,5 +271,23 @@ public class Path {
 
     public enum PathState {
         GOOD, NOT_THE_SAME_START_AS_END, VISITED_DUPLICATELY, NOT_ALL_VISITED
+    }
+
+    public void write() {
+        try {
+            FileWriter fw = new FileWriter("result.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw);
+            out.print(totalCost + ", path: ");
+            for (int i = 0; i < order.length; i++) {
+                out.print(order[i] + " ");
+            }
+            out.print("\n");
+            out.close();
+            bw.close();
+            fw.close();
+        } catch (IOException e) {
+            System.exit(1);
+        }
     }
 }
