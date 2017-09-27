@@ -40,8 +40,6 @@ public class TwoOptSearch extends TSP {
     }
 
     private Path pickTwoRandomEdge(Path path) {
-        Memo memo = new Memo("twoOpt");
-
         Path minPath = path.deepCopy();
 
         int trial = 0;
@@ -56,14 +54,17 @@ public class TwoOptSearch extends TSP {
             }
 
             trial++;
+
+            // delete this, just for debug
             if (timer.tick()) {
-                System.out.printf("iter(%6.2fM), timeDelta(%4.2f), cost(%5.2f)\n",
-                        trial / 1000000.0, timer.toc(), minPath.totalCost);
-                memo.doMemo((int)Math.round(minPath.totalCost));
+                System.out.println(
+                        "iter : " + trial / 1000000.0 + "M, "
+                                + "time : " + timer.toc() + "s, "
+                                + "cost : " + minPath.totalCost
+                );
             }
         }
 
-        memo.saveMemo();
         return minPath;
     }
 
