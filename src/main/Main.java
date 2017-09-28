@@ -10,11 +10,17 @@ import util.Map;
 import util.Path;
 import util.Chart;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String... args) {
         // read file
         // cf) 662's optimal tour = 2513
-        Map.setMapFile("data/131.txt");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("input data name in 'data' folder : ");
+        String fileName = sc.next();
+        sc.close();
+        Map.setMapFile("data/" + fileName);
         Map map = Map.getInstance();
         // map.printCityHashMap();
         // map.printDistanceMap();
