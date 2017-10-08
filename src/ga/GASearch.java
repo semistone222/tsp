@@ -63,10 +63,10 @@ public class GASearch extends TSP {
             Arrays.sort(this.population, asc);
 
             // select parent in population
-            Path[] parents = this.selection.select(population);
+            int[] parentsIdx = this.selection.select(population);
 
             // crossover to make child
-            Path[] child = this.crossover.crossover(parents[0], parents[1]);
+            Path[] child = this.crossover.crossover(population[parentsIdx[0]], population[parentsIdx[1]]);
 
             // mutate child with low probability
             this.mutation.mutate(child[0]);

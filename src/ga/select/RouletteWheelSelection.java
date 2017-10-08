@@ -13,7 +13,7 @@ public class RouletteWheelSelection implements Selection {
     }
 
     @Override
-    public Path[] select(Path[] population) {
+    public int[] select(Path[] population) {
         // assume that population is sorted by cost asc
         double sumOfFitness = 0;
         for(Path path : population) {
@@ -25,20 +25,22 @@ public class RouletteWheelSelection implements Selection {
             );
         }
 
-        Path[] parents = new Path[2];
-        parents[0] = spin(population, sumOfFitness);
-        parents[1] = spin(population, sumOfFitness);
+        int[] parentsIdx = new int[2];
+        parentsIdx[0] = spin(population, sumOfFitness);
+        parentsIdx[1] = spin(population, sumOfFitness);
 
-        return parents;
+        return parentsIdx;
     }
 
-    private Path spin(Path[] population, double sumOfFitness) {
-        Path ret = population[0];
+    private int spin(Path[] population, double sumOfFitness) {
+        int ret = -1;
         Random random = new Random();
         double point = sumOfFitness * random.nextDouble();
         double sum = 0;
 
-        for(Path path : population) {
+        for(int i = 0; i < population.length; i++) {
+            Path path = population[i];
+
             sum += fi(
                     population[population.length - 1].totalCost,
                     population[0].totalCost,
@@ -47,9 +49,14 @@ public class RouletteWheelSelection implements Selection {
             );
 
             if(point < sum) {
-                ret = path;
+                ret = i;
                 break;
             }
+        }
+
+        if(ret == -1) {
+            System.err.println("======ROULETTE ERR======");
+            System.exit(1);
         }
 
         return ret;

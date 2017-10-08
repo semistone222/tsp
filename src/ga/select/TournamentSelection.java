@@ -17,23 +17,26 @@ public class TournamentSelection implements Selection {
     }
 
     @Override
-    public Path[] select(Path[] population) {
-        Path[] parents = new Path[2];
-        parents[0] = compete(population);
-        parents[1] = compete(population);
+    public int[] select(Path[] population) {
+        int[] parentsIdx = new int[2];
+        parentsIdx[0] = compete(population);
+        parentsIdx[1] = compete(population);
 
-        return parents;
+        return parentsIdx;
     }
 
-    private Path compete(Path[] population) {
+    private int compete(Path[] population) {
         Random random = new Random();
         int minIdx = 0;
         int maxIdx = population.length - 1;
 
+        HashMap<Path, Integer> hashMap = new HashMap<>();
         Queue<Path> tournament = new LinkedList<>();
         for(int i = 0; i < tournamentSize; i++) {
             int randomIdx = random.nextInt(maxIdx - minIdx + 1) + minIdx;
-            tournament.offer(population[randomIdx]);
+            Path randomPath = population[randomIdx];
+            hashMap.put(randomPath, randomIdx);
+            tournament.offer(randomPath);
         }
 
         while(tournament.size() > 1) {
@@ -47,6 +50,6 @@ public class TournamentSelection implements Selection {
             }
         }
 
-        return tournament.poll();
+        return hashMap.get(tournament.poll());
     }
 }
