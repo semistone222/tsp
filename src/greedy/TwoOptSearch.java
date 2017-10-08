@@ -68,6 +68,7 @@ public class TwoOptSearch extends TSP {
     }
 
     // something wrong with this method
+    @Deprecated
     private Path pickTwoLongEdge(Path path) {
         Path minPath = path.deepCopy();
 
@@ -92,6 +93,7 @@ public class TwoOptSearch extends TSP {
     }
 
     // not good
+    @Deprecated
     private Path pickWeightedRandomEdge(Path path) {
         Path minPath = path.deepCopy();
 

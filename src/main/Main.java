@@ -62,10 +62,5 @@ public class Main {
         Path path6 = ourSearch.calculatePath(map.getCenterCityId());
         path6.printTotalCost();
 
-        // Demo Search test
-        // DemoSearch demoSearch = new DemoSearch(100, 16, 0.05);
-        // Path path7 = demoSearch.calculatePath(1);
-        // path7.printTotalCost();
-
     }
 }

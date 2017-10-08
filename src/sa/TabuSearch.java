@@ -1,6 +1,5 @@
 package sa;
 
-import our.RandomPath;
 import greedy.NearestNeighbor;
 import javafx.util.Pair;
 import util.Path;
