@@ -1,20 +1,12 @@
 package main;
 
 import ga.GASearch;
-import ga.crossover.PMXCrossover;
+import ga.crossover.PartiallyMatchedCrossover;
 import ga.initialize.RandomInitializer;
 import ga.mutate.SwapMutation;
-import ga.select.PseudoTournamentSelection;
-import greedy.NearestNeighbor;
-import greedy.ThreeOptSearch;
-import greedy.TwoOptSearch;
-import our.DemoSearch;
-import our.OurSearch;
-import sa.SASearch;
-import sa.TabuSearch;
+import ga.select.TournamentSelection;
 import util.Map;
 import util.Path;
-import util.Chart;
 
 import java.util.Scanner;
 
@@ -71,9 +63,9 @@ public class Main {
         GASearch gaSearch = new GASearch(100, 10000);
         gaSearch.setProcess(
                 new RandomInitializer(),
-                new PMXCrossover(),
-                new SwapMutation(),
-                new PseudoTournamentSelection()
+                new TournamentSelection(2 * 2 * 2 * 2),
+                new PartiallyMatchedCrossover(),
+                new SwapMutation(0.01)
         );
 
         Path path7 = gaSearch.calculatePath(1);

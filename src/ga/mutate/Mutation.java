@@ -4,6 +4,6 @@ import util.Path;
 
 public interface Mutation {
 
-    void mutate(Path[] populationList);
+    void mutate(Path path);
 
 }

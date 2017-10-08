@@ -2,10 +2,11 @@ package ga.crossover;
 
 import util.Path;
 
-public class PMXCrossover implements Crossover {
+public class PartiallyMatchedCrossover implements Crossover {
 
     @Override
     public Path[] crossover(Path firstParent, Path secondParent) {
-        return new Path[0];
+        // TODO : not implemented yet
+        return null;
     }
 }

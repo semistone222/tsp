@@ -1,10 +1,9 @@
 package ga.select;
 
+import util.Path;
+
 public interface Selection {
 
-    // TODO : int or Path
-    int getFirstParent();
-    int getSecondParent();
-    void setParentList();
+    Path[] select(Path[] population);
 
 }
