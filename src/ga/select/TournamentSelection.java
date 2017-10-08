@@ -26,12 +26,14 @@ public class TournamentSelection implements Selection {
     }
 
     private Path compete(Path[] population) {
-        List<Path> populationList = new ArrayList<>(Arrays.asList(population));
-        Collections.shuffle(populationList);
+        Random random = new Random();
+        int minIdx = 0;
+        int maxIdx = population.length - 1;
 
         Queue<Path> tournament = new LinkedList<>();
         for(int i = 0; i < tournamentSize; i++) {
-            tournament.offer(populationList.get(i));
+            int randomIdx = random.nextInt(maxIdx - minIdx + 1) + minIdx;
+            tournament.offer(population[randomIdx]);
         }
 
         while(tournament.size() > 1) {
