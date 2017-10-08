@@ -1,9 +1,10 @@
 package main;
 
-import Our.OurSearch;
 import greedy.NearestNeighbor;
 import greedy.ThreeOptSearch;
 import greedy.TwoOptSearch;
+import our.DemoSearch;
+import our.OurSearch;
 import sa.SASearch;
 import sa.TabuSearch;
 import util.Map;
@@ -42,7 +43,7 @@ public class Main {
         // Path path3 = threeOptSearch.calculatePath(map.getCenterCityId());
         // path3.printOrder();
         // path3.printTotalCost();
-        //new Chart(path3);
+        // new Chart(path3);
 
         // SASearch test
         // SASearch saSearch = new SASearch(90, 100000);
@@ -60,5 +61,11 @@ public class Main {
         OurSearch ourSearch = new OurSearch();
         Path path6 = ourSearch.calculatePath(map.getCenterCityId());
         path6.printTotalCost();
+
+        // Demo Search test
+        // DemoSearch demoSearch = new DemoSearch(100, 16, 0.05);
+        // Path path7 = demoSearch.calculatePath(1);
+        // path7.printTotalCost();
+
     }
 }

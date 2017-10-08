@@ -1,7 +1,10 @@
 package sa;
 
 import greedy.NearestNeighbor;
-import util.*;
+import util.Path;
+import util.Pick;
+import util.TSP;
+import util.Timer;
 
 public class SASearch extends TSP {
 
@@ -19,12 +22,12 @@ public class SASearch extends TSP {
         this.T0 = T0;
         this.T = T0;
         this.numOfIteration = numOfIteration;
-        this.timer = new Timer(Timer.FIRST_DEMO_LIMIT_SEC);
+        this.timer = new Timer();
     }
 
     @Override
     public Path calculatePath(int startPoint) {
-        this.timer.start(System.currentTimeMillis());
+        timer.tic();
         NearestNeighbor nearestNeighbor = new NearestNeighbor();
         Path path = nearestNeighbor.calculatePath(startPoint);
         return calculatePath(path);
@@ -32,67 +35,37 @@ public class SASearch extends TSP {
 
     @Override
     public Path calculatePath(Path path) {
-        /* initialize */
-        int iter = 0, iterOfT = 0;
-        Path minPath, trialPath, RandPath, currentPath, bestPath, savePath;
-        int [] randNums;
+        int n = 0, k = 0;
+        Path minPath = path.deepCopy();
+        while(!timer.isOver(Timer.FIRST_DEMO_LIMIT_SEC) && T > 0.001) {
+            for(int i = 0; i < numOfIteration; i++) {
+                Path trialPath = minPath.deepCopy();
+                int[] twoRandomNum = Pick.getTwoRandomIndex(1, numOfCities - 1);
+                trialPath.twoOptSwap(twoRandomNum[0], twoRandomNum[1]);
 
-        /* start */
-        minPath = path.deepCopy();
-        trialPath = path.deepCopy();
-        RandPath = path.deepCopy();
-        bestPath = path.deepCopy();
-        savePath = path.deepCopy();
+                if(minPath.totalCost > trialPath.totalCost) {
+                    minPath = trialPath.deepCopy();
+                } else if (Math.random() < Math.pow(Math.E, (minPath.totalCost - trialPath.totalCost) / T)) {
+                    minPath = trialPath.deepCopy();
+                }
+                n++;
 
-        while(!timer.isTimeGone()) {
-
-            //최저에서 아무거나 바꿔본다 <min에서 rand 생성!>
-            RandPath = minPath.deepCopy();
-            for(int i = 0 ; i < 3; i++) {
-                randNums = Pick.randNums(3, numOfCities);
-                RandPath.threeOptSwap(randNums[0], randNums[1], randNums[2]);
-            }
-
-            //바꾼 값을 열심히 최적화 해본다 <trial로 rand를 열심히 최적화!>
-            for (int i = 0; i < numOfIteration; i++) {
-                trialPath = RandPath.deepCopy();
-                randNums = Pick.randNums(3, numOfCities);
-                trialPath.threeOptSwap(randNums[0], randNums[1], randNums[2]);
-
-                if (RandPath.totalCost > trialPath.totalCost) RandPath = trialPath.deepCopy();
-                if (savePath.totalCost > trialPath.totalCost) savePath = trialPath.deepCopy();
-                iter++;
-
+                // delete this, just for debug
                 if (timer.tick()) {
-                    System.out.printf("iter(%6.2fM), timeDelta(%4.2f), cost(%5.2f) T(%3.2f)\n",
-                            iter / 1000000.0, timer.toc(), RandPath.totalCost, T);
-                }
-                if (timer.isTimeGone()) break;
-            }
-
-            //어느정도 최적화 (local optima에 접근했다고 가정한다) 가 되었다고 치고 비교하자
-            //그럼 global 최적해와 rand를 비교한다
-            if (minPath.totalCost > RandPath.totalCost) {
-                minPath = RandPath.deepCopy(); // 더 좋으면 가야지 (다음출발값)
-            }
-            else {
-                //근데 안좋으면?
-                double criteria = Math.pow(Math.E, (minPath.totalCost - RandPath.totalCost)/T);
-                if (Math.random() < criteria) {
-                    minPath = RandPath.deepCopy(); // 나쁜값이라도 받아들여볼까
-                    System.out.println("accpet");
-                }
-                else {
-                    minPath = bestPath.deepCopy();
-                    System.out.println("denied");
+                    System.out.println(
+                            "time : " + timer.toc() + "s, "
+                                    + "n : " + n + ", "
+                                    + "k : " + k + ", "
+                                    + "T : " + T + ", "
+                                    + "cost : " + minPath.totalCost
+                    );
                 }
             }
-
-            int temp = (int) Math.round(timer.toc()*2);
-            T = Cooling.linearAdditiveCooling(1, T0, 60, temp);
+            // TODO : decide cooling function and parameters
+            T = Cooling.quadraticMultiplicativeCooling(T0, 0.9, k);
+            k++;
         }
 
-
-        return savePath;
+        return minPath;
     }
 }
