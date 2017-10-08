@@ -16,7 +16,7 @@ import java.util.Arrays;
  * https://ko.wikipedia.org/wiki/%EC%9C%A0%EC%A0%84_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98
  * https://en.wikipedia.org/wiki/Genetic_algorithm
  * https://kr.mathworks.com/discovery/genetic-algorithm.html
- * memetic algorithm (Genetic Local Search)
+ * memetic algorithm (genetic local search)
  * http://kowon.dongseo.ac.kr/~dkkang/AI2011Fall/W0910.pdf page 8
  */
 public class GASearch extends TSP {
