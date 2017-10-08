@@ -69,9 +69,8 @@ public class GASearch extends TSP {
             Path[] child = this.crossover.crossover(parents[0], parents[1]);
 
             // mutate child with low probability
-            for(Path children : child) {
-                this.mutation.mutate(children);
-            }
+            this.mutation.mutate(child[0]);
+            this.mutation.mutate(child[1]);
 
             // replace two worst solution with new child
             this.population[populationSize - 2] = child[0];
