@@ -35,7 +35,6 @@ public class TabuSearch extends TSP {
     @Override
     public Path calculatePath(Path path) {
         Path retPath = path.deepCopy();
-        Memo memo = new Memo("Tabu");
 
         while(!timer.isOver(Timer.FIRST_DEMO_LIMIT_SEC)) {
 
@@ -64,14 +63,14 @@ public class TabuSearch extends TSP {
             }
 
             // delete this, just for debug
-            if (timer.tick()){
-                System.out.printf("iter(%6.2fM), timeDelta(%4.2f), cost(%5.2f)\n",
-                        0.0, timer.toc(), retPath.totalCost);
-                memo.doMemo((int)Math.round(retPath.totalCost));
+            if (timer.tick()) {
+                System.out.println(
+                        "time : " + timer.toc() + "s, "
+                                + "cost : " + retPath.totalCost
+                );
             }
         }
 
-        memo.saveMemo();
         return retPath;
     }
 }

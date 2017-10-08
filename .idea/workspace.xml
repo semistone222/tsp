@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1c17f0b-08d4-4803-9d49-d8441e36dc9d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/our/RandomPath.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/greedy/TwoOptSearch.java" afterPath="$PROJECT_DIR$/src/greedy/TwoOptSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Main.java" afterPath="$PROJECT_DIR$/src/main/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/our/DemoSearch.java" afterPath="$PROJECT_DIR$/src/our/DemoSearch.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sa/TabuSearch.java" afterPath="$PROJECT_DIR$/src/sa/TabuSearch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/Path.java" afterPath="$PROJECT_DIR$/src/util/Path.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,11 +18,23 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
+          <file leaf-file-name="OurSearch.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/our/OurSearch.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-250">
+                  <caret line="28" column="48" lean-forward="false" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="TabuSearch.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/sa/TabuSearch.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="23">
-                  <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+                <state relative-caret-position="440">
+                  <caret line="67" column="48" lean-forward="false" selection-start-line="67" selection-start-column="48" selection-end-line="67" selection-end-column="48" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -36,7 +45,7 @@
           <file leaf-file-name="Path.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/util/Path.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="233">
+                <state relative-caret-position="254">
                   <caret line="307" column="29" lean-forward="true" selection-start-line="307" selection-start-column="29" selection-end-line="307" selection-end-column="29" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -94,6 +103,7 @@
       <find>timer</find>
       <find>T</find>
       <find>numofci</find>
+      <find>memo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -124,7 +134,6 @@
         <option value="$PROJECT_DIR$/src/greedy/NearestNeighbor.java" />
         <option value="$PROJECT_DIR$/results.txt" />
         <option value="$PROJECT_DIR$/src/util/Memo.java" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/util/Chart.java" />
         <option value="$PROJECT_DIR$/src/sa/Pair.java" />
         <option value="$PROJECT_DIR$/src/Our/RandomPath.java" />
@@ -137,9 +146,10 @@
         <option value="$PROJECT_DIR$/src/our/DemoSearch.java" />
         <option value="$PROJECT_DIR$/src/main/Main.java" />
         <option value="$PROJECT_DIR$/src/greedy/TwoOptSearch.java" />
-        <option value="$PROJECT_DIR$/src/sa/TabuSearch.java" />
         <option value="$PROJECT_DIR$/src/util/RandomPath.java" />
         <option value="$PROJECT_DIR$/src/util/Path.java" />
+        <option value="$PROJECT_DIR$/src/sa/TabuSearch.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -403,12 +413,12 @@
       <workItem from="1506387469038" duration="166000" />
       <workItem from="1506392774410" duration="4046000" />
       <workItem from="1506589192146" duration="283000" />
-      <workItem from="1507437973351" duration="593000" />
+      <workItem from="1507437973351" duration="974000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75419000" />
+    <option name="totallyTimeSpent" value="75800000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="49" width="2182" height="1402" extended-state="6" />
@@ -485,7 +495,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sa/TabuSearch.java</url>
-          <line>41</line>
+          <line>40</line>
           <properties />
           <option name="timeStamp" value="25" />
         </line-breakpoint>
@@ -701,13 +711,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/results.txt" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="24" column="11" lean-forward="false" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/records/0926.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="363">
@@ -799,23 +802,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/our/OurSearch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="28" column="48" lean-forward="false" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/result.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sa/SASearch.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -870,19 +856,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sa/TabuSearch.java">
+    <entry file="file://$PROJECT_DIR$/src/our/OurSearch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+        <state relative-caret-position="-250">
+          <caret line="28" column="48" lean-forward="false" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/sa/TabuSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="67" column="48" lean-forward="false" selection-start-line="67" selection-start-column="48" selection-end-line="67" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/result.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/util/Path.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
+        <state relative-caret-position="254">
           <caret line="307" column="29" lean-forward="true" selection-start-line="307" selection-start-column="29" selection-end-line="307" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
