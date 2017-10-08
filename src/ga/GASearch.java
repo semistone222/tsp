@@ -56,7 +56,7 @@ public class GASearch extends TSP {
         // using cost ascending comparator
         PathComparatorAscCost asc = new PathComparatorAscCost();
 
-        // TODO : it is hard to say that this is GA... because only two child is processed in each generation. am i right?
+        // TODO : it is weird to say that this is GA... because only two child is processed in each generation. am i right?
         // repeat for generationSize
         for(int i = 0; i < generationSize; i++) {
             // sort by cost ascending
