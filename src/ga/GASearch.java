@@ -11,12 +11,13 @@ import util.TSP;
 import java.util.Arrays;
 
 /**
- * TODO : further investigation required
+ * TODO : further research required
  * http://www.aistudy.com/biology/genetic/operator_moon.htm
  * https://ko.wikipedia.org/wiki/%EC%9C%A0%EC%A0%84_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98
  * https://en.wikipedia.org/wiki/Genetic_algorithm
  * https://kr.mathworks.com/discovery/genetic-algorithm.html
  * memetic algorithm (Genetic Local Search)
+ * http://kowon.dongseo.ac.kr/~dkkang/AI2011Fall/W0910.pdf page 8
  */
 public class GASearch extends TSP {
 
@@ -55,6 +56,7 @@ public class GASearch extends TSP {
         // using cost ascending comparator
         PathComparatorAscCost asc = new PathComparatorAscCost();
 
+        // TODO : it is hard to say that this is GA... because only two child is processed in each generation. am i right?
         // repeat for generationSize
         for(int i = 0; i < generationSize; i++) {
             // sort by cost ascending
