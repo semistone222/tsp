@@ -13,7 +13,7 @@ public class Memo {
     public void doMemo (int val) { memo.add(val); }
     public void saveMemo () {
         try {
-            FileWriter fw = new FileWriter("results.txt", true);
+            FileWriter fw = new FileWriter("costs.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw);
             out.print(info);

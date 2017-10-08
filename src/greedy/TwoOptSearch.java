@@ -15,7 +15,6 @@ public class TwoOptSearch extends TSP {
     @Override
     public Path calculatePath(int startPoint) {
         timer.tic();
-
         NearestNeighbor nearestNeighbor = new NearestNeighbor();
         Path path = nearestNeighbor.calculatePath(startPoint);
         return calculatePath(path);
@@ -69,6 +68,7 @@ public class TwoOptSearch extends TSP {
     }
 
     // something wrong with this method
+    @Deprecated
     private Path pickTwoLongEdge(Path path) {
         Path minPath = path.deepCopy();
 
@@ -93,6 +93,7 @@ public class TwoOptSearch extends TSP {
     }
 
     // not good
+    @Deprecated
     private Path pickWeightedRandomEdge(Path path) {
         Path minPath = path.deepCopy();
 

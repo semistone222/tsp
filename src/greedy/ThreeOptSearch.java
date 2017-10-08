@@ -24,7 +24,7 @@ public class ThreeOptSearch extends TSP {
     }
 
     private Path threeOptSearch (Path path) {
-        Memo memo = new Memo("treeOptSearch");
+        Memo memo = new Memo("treeOpt");
 
         Path minPath = path.deepCopy();
         Path trialPath;

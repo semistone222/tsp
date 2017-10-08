@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+@Deprecated
 public class DemoSearch extends TSP {
 
     private final double T0;
