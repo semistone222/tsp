@@ -61,7 +61,7 @@ public class SASearch extends TSP {
                     );
                 }
             }
-            // TODO : decide cooling function and parameters
+
             T = Cooling.quadraticMultiplicativeCooling(T0, 0.9, k);
             k++;
         }

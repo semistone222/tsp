@@ -55,7 +55,6 @@ public class GASearch extends TSP {
         // using cost ascending comparator
         PathComparatorAscCost asc = new PathComparatorAscCost();
 
-        // TODO : better way...?
         // repeat for generationSize
         for(int i = 0; i < generationSize; i++) {
             // sort by cost ascending
