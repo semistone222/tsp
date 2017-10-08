@@ -14,7 +14,7 @@ public class RouletteWheelSelection implements Selection {
 
     @Override
     public int[] select(Path[] population) {
-        // assume that population is sorted by cost asc
+        // important! assume that population is sorted by cost asc
         double sumOfFitness = 0;
         for(Path path : population) {
             sumOfFitness += fi(
