@@ -3,9 +3,11 @@ package main;
 import ga.GASearch;
 import ga.crossover.PartiallyMatchedCrossover;
 import ga.initialize.RandomInitializer;
+import ga.initialize.SAInitializer;
 import ga.mutate.SwapMutation;
 import ga.select.RouletteWheelSelection;
 import ga.select.TournamentSelection;
+import sa.SASearch;
 import util.Map;
 import util.Path;
 
@@ -63,7 +65,7 @@ public class Main {
         // GA test
         GASearch gaSearch = new GASearch(100, 100000);
         gaSearch.setProcess(
-                new RandomInitializer(),
+                new SAInitializer(30, 10000),
                 new TournamentSelection(2 * 2 * 2 * 2),
                 new PartiallyMatchedCrossover(),
                 new SwapMutation(0.01)
