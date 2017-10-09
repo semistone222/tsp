@@ -25,6 +25,12 @@ public class RouletteWheelSelection implements Selection {
             );
         }
 
+        // TODO : it seems to be problem. fix this.
+        // for debug, delete this
+        if(sumOfFitness == 0) {
+            System.out.println("ALL POPULATION IS SAME");
+        }
+
         int[] parentsIdx = new int[2];
         parentsIdx[0] = spin(population, sumOfFitness);
         parentsIdx[1] = spin(population, sumOfFitness);

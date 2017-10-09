@@ -4,6 +4,7 @@ import ga.GASearch;
 import ga.crossover.PartiallyMatchedCrossover;
 import ga.initialize.RandomInitializer;
 import ga.mutate.SwapMutation;
+import ga.select.RouletteWheelSelection;
 import ga.select.TournamentSelection;
 import util.Map;
 import util.Path;
@@ -60,7 +61,7 @@ public class Main {
         // path6.printTotalCost();
 
         // GA test
-        GASearch gaSearch = new GASearch(100, 10000);
+        GASearch gaSearch = new GASearch(100, 100000);
         gaSearch.setProcess(
                 new RandomInitializer(),
                 new TournamentSelection(2 * 2 * 2 * 2),

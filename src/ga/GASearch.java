@@ -7,6 +7,7 @@ import ga.select.Selection;
 import util.Path;
 import util.PathComparatorAscCost;
 import util.TSP;
+import util.Timer;
 
 import java.util.Arrays;
 
@@ -30,6 +31,8 @@ public class GASearch extends TSP {
     private Crossover crossover;
     private Mutation mutation;
 
+    private Timer timer;
+
     public GASearch(int populationSize, int generationSize) {
         this.populationSize = populationSize;
         this.generationSize = generationSize;
@@ -39,6 +42,8 @@ public class GASearch extends TSP {
         this.selection = null;
         this.crossover = null;
         this.mutation = null;
+
+        this.timer = new Timer();
     }
 
     public void setProcess(Initializer initializer, Selection selection, Crossover crossover, Mutation mutation) {
@@ -50,32 +55,50 @@ public class GASearch extends TSP {
 
     @Override
     public Path calculatePath(int startPoint) {
+        // timer start
+        timer.tic();
+
         // generate first generation
         this.population = initializer.initializePopulation(populationSize, startPoint);
 
         // using cost ascending comparator
         PathComparatorAscCost asc = new PathComparatorAscCost();
 
-        // TODO : it is weird to say that this is GA... because only two child is processed in each generation. am i right?
-        // repeat for generationSize
-        for(int i = 0; i < generationSize; i++) {
+        // repeat generationSize times within limited time
+        int currentGeneration = 0;
+        while(currentGeneration < generationSize && !timer.isOver(Timer.SECOND_DEMO_LIMIT_SEC)) {
             // sort by cost ascending
             // this.population[0] is ith generationScore
             Arrays.sort(this.population, asc);
 
-            // select parent in population
-            int[] parentsIdx = this.selection.select(population);
+            // for debug
+            if (timer.tick()) {
+                System.out.println(
+                        "generation : " + currentGeneration + ", "
+                                + "time : " + timer.toc() + "s, "
+                                + "cost : " + this.population[0].totalCost
+                );
+            }
 
-            // crossover to make child
-            Path[] child = this.crossover.crossover(population[parentsIdx[0]], population[parentsIdx[1]]);
+            // replace half population with new child
+            int replaceIdx = 1;
+            while(replaceIdx < (populationSize / 2)) {
+                // select parent in population
+                int[] parentsIdx = this.selection.select(population);
 
-            // mutate child with low probability
-            this.mutation.mutate(child[0]);
-            this.mutation.mutate(child[1]);
+                // crossover to make child
+                Path[] child = this.crossover.crossover(population[parentsIdx[0]], population[parentsIdx[1]]);
 
-            // replace two worst solution with new child
-            this.population[populationSize - 2] = child[0];
-            this.population[populationSize - 1] = child[1];
+                // mutate child with low probability
+                this.mutation.mutate(child[0]);
+                this.mutation.mutate(child[1]);
+
+                // replace two worst solution with new child
+                this.population[populationSize - replaceIdx++] = child[0];
+                this.population[populationSize - replaceIdx++] = child[1];
+            }
+
+            currentGeneration++;
         }
 
         Arrays.sort(this.population, asc);
