@@ -344,9 +344,6 @@ public class Path {
         Path randomPath = new Path(order, 0.0);
         randomPath.refreshCost();
 
-        // debug, delete this.
-        randomPath.printState();
-
         return randomPath;
     }
 }
