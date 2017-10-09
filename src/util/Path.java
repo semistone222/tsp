@@ -64,6 +64,35 @@ public class Path {
         order = newOrder;
     }
 
+    /**
+     * swap city
+     * caution : start point or end point can't be selected.
+     * @param formerIdx former city's index
+     * @param latterIdx latter city's index
+     */
+    public void swapCity(int formerIdx, int latterIdx) {
+        if(formerIdx < 1 || latterIdx > order.length - 2) {
+            System.err.println("======SWAP CITY ERROR======");
+            System.exit(1);
+        }
+
+        recentlySwappedPair = new Pair<>(formerIdx, latterIdx);
+
+        totalCost -= distanceMap[order[formerIdx - 1]][order[formerIdx]];
+        totalCost -= distanceMap[order[formerIdx]][order[formerIdx + 1]];
+        totalCost -= distanceMap[order[latterIdx - 1]][order[latterIdx]];
+        totalCost -= distanceMap[order[latterIdx]][order[latterIdx + 1]];
+
+        int temp = order[formerIdx];
+        order[formerIdx] = order[latterIdx];
+        order[latterIdx] = temp;
+
+        totalCost += distanceMap[order[formerIdx - 1]][order[formerIdx]];
+        totalCost += distanceMap[order[formerIdx]][order[formerIdx + 1]];
+        totalCost += distanceMap[order[latterIdx - 1]][order[latterIdx]];
+        totalCost += distanceMap[order[latterIdx]][order[latterIdx + 1]];
+    }
+
     public int[] getTwoLongEdgeIndex(boolean[][] tried) {
         LinkedList<Edge> edgeList = new LinkedList<>();
         for(int i = 0; i < order.length - 1; i++) {
