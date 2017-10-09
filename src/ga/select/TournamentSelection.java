@@ -6,13 +6,13 @@ import java.util.*;
 
 public class TournamentSelection implements Selection {
 
-    private final double tournamentSize;
+    private final int tournamentSize;
 
     /**
      * cf) the bigger tournamentSize, the higher selection pressure
      * @param tournamentSize should be 2^r, where r is integer
      */
-    public TournamentSelection(double tournamentSize) {
+    public TournamentSelection(int tournamentSize) {
         this.tournamentSize = tournamentSize;
     }
 
