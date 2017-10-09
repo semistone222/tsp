@@ -25,8 +25,8 @@ public class PartiallyMatchedCrossover implements Crossover {
 
         for(int i = firstIdx; i <= secondIdx; i++) {
             int idx1 = getIndexOfCity(firstChildren.order, secondParent.order[i]);
-            int idx2 = getIndexOfCity(secondChildren.order, firstParent.order[i]);
             firstChildren.swapCity(i, idx1);
+            int idx2 = getIndexOfCity(secondChildren.order, firstParent.order[i]);
             secondChildren.swapCity(i, idx2);
         }
 
