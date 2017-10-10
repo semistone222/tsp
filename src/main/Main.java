@@ -8,8 +8,10 @@ import ga.mutate.SwapMutation;
 import ga.select.RouletteWheelSelection;
 import ga.select.TournamentSelection;
 import sa.SASearch;
+import util.Chart;
 import util.Map;
 import util.Path;
+import ga.GAmu;
 
 import java.util.Scanner;
 
@@ -63,15 +65,28 @@ public class Main {
         // path6.printTotalCost();
 
         // GA test
-        GASearch gaSearch = new GASearch(100, 100000);
-        gaSearch.setProcess(
+//        GASearch gaSearch = new GASearch(100, 100000);
+//        gaSearch.setProcess(
+//                new SAInitializer(30, 10000),
+//                new TournamentSelection(2 * 2 * 2 * 2),
+//                new PartiallyMatchedCrossover(),
+//                new SwapMutation(0.01)
+//        );
+//
+//        Path path7 = gaSearch.calculatePath(1);
+//        path7.printTotalCost();
+//        new Chart(path7);
+
+        /* GA group 4 test */
+        GAmu gas = new GAmu(0, 0);
+        gas.setProcess(
                 new SAInitializer(30, 10000),
                 new TournamentSelection(2 * 2 * 2 * 2),
                 new PartiallyMatchedCrossover(),
                 new SwapMutation(0.01)
         );
-
-        Path path7 = gaSearch.calculatePath(1);
-        path7.printTotalCost();
+        Path path8 = gas.calculatePath(1);
+        path8.printTotalCost();
+        new Chart(path8);
     }
 }
