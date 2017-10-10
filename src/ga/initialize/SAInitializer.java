@@ -1,5 +1,6 @@
 package ga.initialize;
 
+import greedy.NearestNeighbor;
 import util.Path;
 
 import java.util.Random;
@@ -26,7 +27,9 @@ public class SAInitializer implements Initializer {
         for(int i = 0; i < populationSize; i++) {
             int randomTrial = (int) (this.numOfIteration * random.nextDouble());
             SA sa = new SA(T0, randomTrial);
-            population[i] = sa.calculatePath(Path.getRandomPath(startCity));
+            NearestNeighbor nearestNeighbor = new NearestNeighbor();
+            Path greedyPath = nearestNeighbor.calculatePath(startCity);
+            population[i] = sa.calculatePath(greedyPath);
         }
 
         return population;
