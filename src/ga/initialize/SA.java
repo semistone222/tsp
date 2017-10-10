@@ -1,19 +1,19 @@
-package sa;
+package ga.initialize;
 
 import greedy.NearestNeighbor;
+import sa.Cooling;
 import util.Path;
 import util.Pick;
 import util.TSP;
-import util.Timer;
 
-public class SASearch extends TSP {
+// for sa initializer
+public class SA extends TSP {
 
     private final double T0;
     private double T;
     private final int numOfIteration;
-    private Timer timer;
 
-    public SASearch(double T0, int numOfIteration) {
+    public SA(double T0, int numOfIteration) {
         if (T0 <= 0) {
             System.out.println("======INITIAL TEMPERATURE SHOULD BE BIGGER THAN 0======");
             System.exit(1);
@@ -22,12 +22,10 @@ public class SASearch extends TSP {
         this.T0 = T0;
         this.T = T0;
         this.numOfIteration = numOfIteration;
-        this.timer = new Timer();
     }
 
     @Override
     public Path calculatePath(int startPoint) {
-        timer.tic();
         NearestNeighbor nearestNeighbor = new NearestNeighbor();
         Path path = nearestNeighbor.calculatePath(startPoint);
         return calculatePath(path);
@@ -35,9 +33,9 @@ public class SASearch extends TSP {
 
     @Override
     public Path calculatePath(Path path) {
-        int n = 0, k = 0;
+        int k = 0;
         Path minPath = path.deepCopy();
-        while(!timer.isOver(Timer.FIRST_DEMO_LIMIT_SEC) && T > 0.001) {
+        while(T > 1) {
             for(int i = 0; i < numOfIteration; i++) {
                 Path trialPath = minPath.deepCopy();
                 int[] twoRandomNum = Pick.getTwoRandomIndex(1, numOfCities - 1);
@@ -48,21 +46,9 @@ public class SASearch extends TSP {
                 } else if (Math.random() < Math.pow(Math.E, (minPath.totalCost - trialPath.totalCost) / T)) {
                     minPath = trialPath.deepCopy();
                 }
-                n++;
-
-                // delete this, just for debug
-                if (timer.tick()) {
-                    System.out.println(
-                            "time : " + timer.toc() + "s, "
-                                    + "n : " + n + ", "
-                                    + "k : " + k + ", "
-                                    + "T : " + T + ", "
-                                    + "cost : " + minPath.totalCost
-                    );
-                }
             }
 
-            T = Cooling.quadraticMultiplicativeCooling(T0, 0.9, k);
+            T = Cooling.exponentialMultiplicativeCooling(T0, 0.8, k);
             k++;
         }
 

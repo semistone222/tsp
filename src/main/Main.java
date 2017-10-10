@@ -1,15 +1,15 @@
 package main;
 
-import greedy.NearestNeighbor;
-import greedy.ThreeOptSearch;
-import greedy.TwoOptSearch;
-import our.DemoSearch;
-import our.OurSearch;
+import ga.GASearch;
+import ga.crossover.PartiallyMatchedCrossover;
+import ga.initialize.RandomInitializer;
+import ga.initialize.SAInitializer;
+import ga.mutate.SwapMutation;
+import ga.select.RouletteWheelSelection;
+import ga.select.TournamentSelection;
 import sa.SASearch;
-import sa.TabuSearch;
 import util.Map;
 import util.Path;
-import util.Chart;
 
 import java.util.Scanner;
 
@@ -58,9 +58,20 @@ public class Main {
         // path5.printTotalCost();
 
         // SA + Tabu test
-        OurSearch ourSearch = new OurSearch();
-        Path path6 = ourSearch.calculatePath(map.getCenterCityId());
-        path6.printTotalCost();
+        // OurSearch ourSearch = new OurSearch();
+        // Path path6 = ourSearch.calculatePath(map.getCenterCityId());
+        // path6.printTotalCost();
 
+        // GA test
+        GASearch gaSearch = new GASearch(100, 100000);
+        gaSearch.setProcess(
+                new SAInitializer(30, 10000),
+                new TournamentSelection(2 * 2 * 2 * 2),
+                new PartiallyMatchedCrossover(),
+                new SwapMutation(0.01)
+        );
+
+        Path path7 = gaSearch.calculatePath(1);
+        path7.printTotalCost();
     }
 }
