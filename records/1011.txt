@@ -1,29 +1,72 @@
 [Experiment on 1911_6396.txt] by semistone222
 
-GASearch
-    SAInitializer with numOfIterations 10000
-        generation : 2813, time : 119.508s, cost : 8818.946033314778
+GASearch gaSearch = new GASearch(100, 100000);
+gaSearch.setProcess(
+        new SAInitializer(30, 10000),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01)
+);
+=> generation : 2813, time : 119.508s, cost : 8818.946033314778
 
-GeneticLocalSearch
-    //////////////////
-    SAInitializer with numOfIterations 10000, Optimizer with 2-opt 10000 times
-        generation : 8, time : 114.446s, cost : 8378.685193095096
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 10000),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TwoOptOptimizer(10000)
+);
+=> generation : 8, time : 114.446s, cost : 8378.685193095096
 
-    SAInitializer with numOfIterations 10000, Optimizer with 2-opt 1000 times
-        generation : 92, time : 119.652s, cost : 7424.254017671939
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 10000),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TwoOptOptimizer(1000)
+);
+=> generation : 92, time : 119.652s, cost : 7424.254017671939
 
-    SAInitializer with numOfIterations 10000, Optimizer with 2-opt 100 times
-        generation : 447, time : 119.54s, cost : 7234.669512855336
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 10000),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TwoOptOptimizer(100)
+);
+=> generation : 447, time : 119.54s, cost : 7234.669512855336
 
-    SAInitializer with numOfIterations 10000, Optimizer with 2-opt 10 times
-        generation : 1818, time : 119.525s, cost : 7718.362852294251
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 10000),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TwoOptOptimizer(10)
+);
+=> generation : 1818, time : 119.525s, cost : 7718.362852294251
 
-    //////////////////
-    SAInitializer with numOfIterations 100, Optimizer with 2-opt 100 times
-        ga after sa init /// generation : 0, time : 1.689s, cost : 8137.248957110883
-        end /// generation : 1271, time : 119.579s, cost : 7123.305692464588
-    => BEST!
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TwoOptOptimizer(100)
+);
+=> ga after sa init /// generation : 0, time : 1.689s, cost : 8137.248957110883
+    end /// generation : 1271, time : 119.579s, cost : 7123.305692464588
 
-    SAInitializer with numOfIterations 10000, Optimizer with 2-opt 100 times
-        ga after sa init /// generation : 0, time : 52.659s, cost : 8248.802033541993
-        end /// generation : 719, time : 119.514s, cost : 7181.287311274196
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 10000),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TwoOptOptimizer(100)
+);
+=> ga after sa init /// generation : 0, time : 52.659s, cost : 8248.802033541993
+    end /// generation : 719, time : 119.514s, cost : 7181.287311274196

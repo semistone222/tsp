@@ -67,15 +67,16 @@ public class GeneticLocalSearch extends TSP {
                 );
             }
 
+            // TODO : refactoring
             int replaceIdx = 1;
             while(replaceIdx < (populationSize / 2)) {
                 int[] parentsIdx = selection.select(population);
                 Path[] child = crossover.crossover(population[parentsIdx[0]], population[parentsIdx[1]]);
-                for(Path children : child) {
-                    children = optimizer.optimize(children);
-                    mutation.mutate(children);
-                    children = optimizer.optimize(children);
-                    population[populationSize - replaceIdx++] = children;
+                for(int i = 0; i < child.length; i++) {
+                    child[i] = optimizer.optimize(child[i]);
+                    mutation.mutate(child[i]);
+                    child[i] = optimizer.optimize(child[i]);
+                    population[populationSize - replaceIdx++] = child[i];
                 }
             }
             currentGeneration++;
