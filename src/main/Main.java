@@ -6,8 +6,10 @@ import ga.crossover.PartiallyMatchedCrossover;
 import ga.initialize.RandomInitializer;
 import ga.initialize.SAInitializer;
 import ga.mutate.SwapMutation;
+import ga.optimize.TabuOptimizer;
 import ga.optimize.TwoOptOptimizer;
 import ga.select.TournamentSelection;
+import util.Chart;
 import util.Map;
 import util.Path;
 
@@ -80,7 +82,7 @@ public class Main {
                 new TournamentSelection(2 * 2 * 2 * 2),
                 new PartiallyMatchedCrossover(),
                 new SwapMutation(0.01),
-                new TwoOptOptimizer(100)
+                new TabuOptimizer(0.1, 0.005, 1)
         );
 
         Path path8 = geneticLocalSearch.calculatePath(1);

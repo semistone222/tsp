@@ -67,7 +67,6 @@ public class GeneticLocalSearch extends TSP {
                 );
             }
 
-            // TODO : refactoring
             int replaceIdx = 1;
             while(replaceIdx < (populationSize / 2)) {
                 int[] parentsIdx = selection.select(population);

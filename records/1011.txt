@@ -70,3 +70,54 @@ geneticLocalSearch.setProcess(
 );
 => ga after sa init /// generation : 0, time : 52.659s, cost : 8248.802033541993
     end /// generation : 719, time : 119.514s, cost : 7181.287311274196
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(8, 0.05, 1)
+);
+=> generation : 7, time : 105.39s, cost : 7785.490912624453
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(1, 0.05, 1)
+);
+=> generation : 72, time : 118.705s, cost : 7189.762706792752
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1 , 0.05, 1)
+);
+=> generation : 695, time : 119.624s, cost : 7137.548845708294
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1, 0.5, 1)
+);
+=> generation : 329, time : 119.538s, cost : 7201.9578473931
+
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1, 0.005, 1)
+);
+=> generation : 804, time : 119.528s, cost : 7073.677917278357
