@@ -79,7 +79,7 @@ public class Main {
         GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
         geneticLocalSearch.setProcess(
                 new SAInitializer(30, 100),
-                new TournamentSelection(2 * 2 * 2 * 2),
+                new TournamentSelection(2 * 2),
                 new PartiallyMatchedCrossover(),
                 new SwapMutation(0.01),
                 new TabuOptimizer(0.1, 0.005, 1)

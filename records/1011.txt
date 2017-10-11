@@ -121,3 +121,33 @@ geneticLocalSearch.setProcess(
         new TabuOptimizer(0.1, 0.005, 1)
 );
 => generation : 804, time : 119.528s, cost : 7073.677917278357
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1, 0.005, 1)
+);
+=> generation : 823, time : 119.505s, cost : 7131.107671236883
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1, 0.005, 1)
+);
+=> generation : 822, time : 119.611s, cost : 7059.392359869321
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1, 0.005, 1)
+);
+=> generation : 836, time : 119.598s, cost : 7067.179749896139
