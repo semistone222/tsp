@@ -1,48 +1,12 @@
 package ga;
 
-import ga.crossover.Crossover;
-import ga.initialize.Initializer;
-import ga.mutate.Mutation;
-import ga.select.Selection;
 import greedy.NearestNeighbor;
 import sa.TabuSearch;
 import util.*;
 
-import java.util.Arrays;
-
-public class GAmu2 extends TSP {
-    /* super */
-    /* protected int numofCities;
-     * protected double distanceMap[][]; */
-    private int generation;
-
-    private Initializer initializer;
-    private Selection selection;
-    private Crossover crossover;
-    private Mutation mutation;
-
-    private Timer timer;
-
-    public GAmu2(){
-        this.generation = 0;
-
-        this.initializer = null;
-        this.selection = null;
-        this.crossover = null;
-        this.mutation = null;
-
-        this.timer = new Timer();
-    }
-
-    public void setProcess(Initializer initializer, Selection selection, Crossover crossover, Mutation mutation) {
-        this.initializer = initializer;
-        this.selection = selection;
-        this.crossover = crossover;
-        this.mutation = mutation;
-    }
-
+public class GAmu2 extends GATSP {
     @Override
-    public Path calculatePath(int notUsed) {
+    public Path calculatePath() {
         timer.tic();
         Memo groupMemo[][] = new Memo[4][5];
         Memo timeCheker = new Memo("time");
@@ -187,10 +151,5 @@ public class GAmu2 extends TSP {
         ret.printTotalCost();
 
         return ret;
-    }
-
-    @Override // 사용하지 않음
-    public Path calculatePath(Path path) {
-        return null;
     }
 }
