@@ -51,12 +51,12 @@ public class GAmu extends TSP{
     public Path calculatePath(int notUsed) {
         /* stage 1
          * Nearest 5 Path */
-        // TODO this random not work! = different start point will occur error in crossover
-        // int randNum[] = Pick.randNums(5, this.numOfCities - 1);
+        // TODO if start point is different, crossover occurs error
+        int randNum[] = Pick.randNums(5, this.numOfCities);
         Path start5path[] = new Path[5];
         NearestNeighbor nearestNeighbor = new NearestNeighbor();
         for (int i = 0; i < 5; i++) {
-            start5path[i] = nearestNeighbor.calculatePath(0);
+            start5path[i] = nearestNeighbor.calculatePath(1);
         }
 
         /* stage 2
