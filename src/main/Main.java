@@ -1,13 +1,15 @@
 package main;
 
 import ga.GASearch;
+import ga.GeneticLocalSearch;
 import ga.crossover.PartiallyMatchedCrossover;
 import ga.initialize.RandomInitializer;
 import ga.initialize.SAInitializer;
 import ga.mutate.SwapMutation;
-import ga.select.RouletteWheelSelection;
+import ga.optimize.TabuOptimizer;
+import ga.optimize.TwoOptOptimizer;
 import ga.select.TournamentSelection;
-import sa.SASearch;
+import util.Chart;
 import util.Map;
 import util.Path;
 
@@ -63,15 +65,27 @@ public class Main {
         // path6.printTotalCost();
 
         // GA test
-        GASearch gaSearch = new GASearch(100, 100000);
-        gaSearch.setProcess(
-                new SAInitializer(30, 10000),
-                new TournamentSelection(2 * 2 * 2 * 2),
+        // GASearch gaSearch = new GASearch(100, 100000);
+        // gaSearch.setProcess(
+        //         new SAInitializer(30, 10000),
+        //         new TournamentSelection(2 * 2 * 2 * 2),
+        //         new PartiallyMatchedCrossover(),
+        //         new SwapMutation(0.01)
+        // );
+
+        // Path path7 = gaSearch.calculatePath(1);
+        // path7.printTotalCost();
+
+        GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+        geneticLocalSearch.setProcess(
+                new SAInitializer(30, 100),
+                new TournamentSelection(2 * 2),
                 new PartiallyMatchedCrossover(),
-                new SwapMutation(0.01)
+                new SwapMutation(0.01),
+                new TabuOptimizer(0.1, 0.005, 1)
         );
 
-        Path path7 = gaSearch.calculatePath(1);
-        path7.printTotalCost();
+        Path path8 = geneticLocalSearch.calculatePath(1);
+        path8.printTotalCost();
     }
 }
