@@ -27,7 +27,7 @@ public class Pick {
 
     public static int[] randNums(int n, int max) {
         ArrayList<Integer> samples = new ArrayList<>();
-        for(int i = 0; i < max; i++) samples.add(i); // 0 ~ max-1
+        for(int i = 1; i <= max; i++) samples.add(i); // 0 ~ max-1
 
         int [] ret = new int[n];
         int index;
