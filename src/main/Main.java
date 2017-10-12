@@ -23,9 +23,12 @@ public class Main {
         // read file
         // cf) 662's optimal tour = 2513
         Scanner sc = new Scanner(System.in);
-        System.out.print("input data name in 'data' folder : ");
-        String fileName = sc.next();
+        System.out.println("Request input data_name in 'data' folder ex>662.txt");
+        System.out.println("blank occurs default data (1911_6396.txt)");
+        System.out.print("filename [type|enter] : ");
+        String fileName = sc.nextLine();
         sc.close();
+        if (fileName.equals("")) fileName = "1911_6396.txt";
         Map.setMapFile("data/" + fileName);
         Map map = Map.getInstance();
         // map.printCityHashMap();
@@ -80,40 +83,40 @@ public class Main {
         // new Chart(path7);
 
         /* GeneticLocalSearch test */
-        GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
-        geneticLocalSearch.setProcess(
-                new SAInitializer(30, 100),
-                new TournamentSelection(2 * 2),
-                new PartiallyMatchedCrossover(),
-                new SwapMutation(0.01),
-                new TabuOptimizer(0.1, 0.005, 1)
-        );
-
-        Path path8 = geneticLocalSearch.calculatePath(1);
-        path8.printTotalCost();
+        // GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+        // geneticLocalSearch.setProcess(
+        //         new SAInitializer(30, 100),
+        //         new TournamentSelection(2 * 2),
+        //         new PartiallyMatchedCrossover(),
+        //         new SwapMutation(0.01),
+        //         new TabuOptimizer(0.1, 0.005, 1)
+        // );
+        //
+        // Path path8 = geneticLocalSearch.calculatePath(1);
+        // path8.printTotalCost();
 
         /* GAmu test (4 Groups Match) */
-        // GAmu gas = new GAmu(0, 0);
+        // GAmu gas = new GAmu();
         // gas.setProcess(
         //         new SAInitializer(30, 10000),
         //         new TournamentSelection(2 * 2 * 2 * 2),
         //         new PartiallyMatchedCrossover(),
         //         new SwapMutation(0.01)
         // );
-        // Path path8 = gas.calculatePath(1);
+        // Path path8 = gas.calculatePath();
         // path8.printTotalCost();
         // new Chart(path8);
 
         /* GAmu2 test (4 Groups Match) */
-        // GAmu2 gas = new GAmu2();
-        // gas.setProcess(
-        //         new SAInitializer(30, 10000),
-        //         new TournamentSelection(2 * 2 * 2 * 2),
-        //         new PartiallyMatchedCrossover(),
-        //         new SwapMutation(0.01)
-        // );
-        // Path path8 = gas.calculatePath(1);
-        // path8.printTotalCost();
-        // new Chart(path8);
+        GAmu2 gas = new GAmu2();
+        gas.setProcess(
+                new SAInitializer(30, 10000),
+                new TournamentSelection(2 * 2 * 2 * 2),
+                new PartiallyMatchedCrossover(),
+                new SwapMutation(0.01)
+        );
+        Path path8 = gas.calculatePath();
+        path8.printTotalCost();
+        new Chart(path8);
     }
 }

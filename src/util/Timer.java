@@ -13,9 +13,7 @@ public class Timer {
         return toc() > limitSec;
     }
 
-    public void tic() {
-        startTime = System.currentTimeMillis();
-    }
+    public void tic() { startTime = System.currentTimeMillis(); }
 
     public double toc() {
         return (System.currentTimeMillis() - startTime) / 1000.0;

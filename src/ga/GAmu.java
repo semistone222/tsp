@@ -1,54 +1,14 @@
 package ga;
 
-import ga.crossover.Crossover;
-import ga.initialize.Initializer;
-import ga.mutate.Mutation;
-import ga.select.Selection;
 import greedy.NearestNeighbor;
 import sa.TabuSearch;
 import util.*;
 
 import java.util.Arrays;
 
-public class GAmu extends TSP{
-    /* super */
-    /* protected int numofCities;
-     * protected double distanceMap[][]; */
-    private int populationSize;
-    private int generationSize;
-    private int generation;
-    private Path[] population;
-
-    private Initializer initializer;
-    private Selection selection;
-    private Crossover crossover;
-    private Mutation mutation;
-
-    private Timer timer;
-
-    public GAmu(int populationSize, int generationSize){
-        this.populationSize = populationSize;
-        this.generationSize = generationSize;
-        this.generation = 0;
-        this.population = null;
-
-        this.initializer = null;
-        this.selection = null;
-        this.crossover = null;
-        this.mutation = null;
-
-        this.timer = new Timer();
-    }
-
-    public void setProcess(Initializer initializer, Selection selection, Crossover crossover, Mutation mutation) {
-        this.initializer = initializer;
-        this.selection = selection;
-        this.crossover = crossover;
-        this.mutation = mutation;
-    }
-
+public class GAmu extends GATSP{
     @Override
-    public Path calculatePath(int notUsed) {
+    public Path calculatePath() {
         /* stage 1
          * Nearest 5 Path */
         // TODO if start point is different, crossover occurs error
@@ -130,10 +90,5 @@ public class GAmu extends TSP{
         Path ret = lastHero[0].deepCopy();
         ret.printState();
         return ret;
-    }
-
-    @Override // 사용하지 않음
-    public Path calculatePath(Path path) {
-        return path;
     }
 }
