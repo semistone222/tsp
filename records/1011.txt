@@ -1,0 +1,153 @@
+[Experiment on 1911_6396.txt] by semistone222
+
+GASearch gaSearch = new GASearch(100, 100000);
+gaSearch.setProcess(
+        new SAInitializer(30, 10000),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01)
+);
+=> generation : 2813, time : 119.508s, cost : 8818.946033314778
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 10000),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TwoOptOptimizer(10000)
+);
+=> generation : 8, time : 114.446s, cost : 8378.685193095096
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 10000),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TwoOptOptimizer(1000)
+);
+=> generation : 92, time : 119.652s, cost : 7424.254017671939
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 10000),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TwoOptOptimizer(100)
+);
+=> generation : 447, time : 119.54s, cost : 7234.669512855336
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 10000),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TwoOptOptimizer(10)
+);
+=> generation : 1818, time : 119.525s, cost : 7718.362852294251
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TwoOptOptimizer(100)
+);
+=> ga after sa init /// generation : 0, time : 1.689s, cost : 8137.248957110883
+    end /// generation : 1271, time : 119.579s, cost : 7123.305692464588
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 10000),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TwoOptOptimizer(100)
+);
+=> ga after sa init /// generation : 0, time : 52.659s, cost : 8248.802033541993
+    end /// generation : 719, time : 119.514s, cost : 7181.287311274196
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(8, 0.05, 1)
+);
+=> generation : 7, time : 105.39s, cost : 7785.490912624453
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(1, 0.05, 1)
+);
+=> generation : 72, time : 118.705s, cost : 7189.762706792752
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1 , 0.05, 1)
+);
+=> generation : 695, time : 119.624s, cost : 7137.548845708294
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1, 0.5, 1)
+);
+=> generation : 329, time : 119.538s, cost : 7201.9578473931
+
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1, 0.005, 1)
+);
+=> generation : 804, time : 119.528s, cost : 7073.677917278357
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2 * 2 * 2 * 2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1, 0.005, 1)
+);
+=> generation : 823, time : 119.505s, cost : 7131.107671236883
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1, 0.005, 1)
+);
+=> generation : 822, time : 119.611s, cost : 7059.392359869321
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1, 0.005, 1)
+);
+=> generation : 836, time : 119.598s, cost : 7067.179749896139
