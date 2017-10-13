@@ -1,7 +1,9 @@
 package main;
 
 import ga.GASearch;
-import ga.crossover.PartiallyMatchedCrossover;
+import ga.crossover.EdgeRecombination;
+//import ga.crossover.PartiallyMatchedCrossover;
+import ga.crossover.EdgeRecombination;
 import ga.initialize.RandomInitializer;
 import ga.initialize.SAInitializer;
 import ga.mutate.SwapMutation;
@@ -63,11 +65,20 @@ public class Main {
         // path6.printTotalCost();
 
         // GA test
+        /*
         GASearch gaSearch = new GASearch(100, 100000);
         gaSearch.setProcess(
                 new SAInitializer(30, 10000),
                 new TournamentSelection(2 * 2 * 2 * 2),
                 new PartiallyMatchedCrossover(),
+                new SwapMutation(0.01)
+        );
+        */
+        GASearch gaSearch = new GASearch(100, 100000);
+        gaSearch.setProcess(
+                new SAInitializer(30, 10000),
+                new TournamentSelection(2 * 2 * 2 * 2),
+                new EdgeRecombination(),
                 new SwapMutation(0.01)
         );
 
