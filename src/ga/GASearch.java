@@ -83,7 +83,7 @@ public class GASearch extends TSP {
 
             // replace half population with new child
             int replaceIdx = 1;
-            while(replaceIdx < (populationSize / 2)) {
+           while(replaceIdx < (populationSize / 2)) {
                 // select parent in population
                 int[] parentsIdx = this.selection.select(population);
 

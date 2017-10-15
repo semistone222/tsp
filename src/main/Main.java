@@ -5,6 +5,7 @@ import ga.GAmu;
 import ga.GAmu2;
 
 import ga.GeneticLocalSearch;
+import ga.crossover.EdgeRecombination;
 import ga.crossover.EdgeRecombinationCrossover;
 import ga.crossover.PartiallyMatchedCrossover;
 import ga.initialize.RandomInitializer;
@@ -88,7 +89,8 @@ public class Main {
         geneticLocalSearch.setProcess(
                 new SAInitializer(30, 100),
                 new TournamentSelection(2 * 2),
-                new EdgeRecombinationCrossover(),
+//                new EdgeRecombinationCrossover(),
+                new EdgeRecombination(),
                 new SwapMutation(0.01),
                 new TabuOptimizer(0.1, 0.005, 1)
         );

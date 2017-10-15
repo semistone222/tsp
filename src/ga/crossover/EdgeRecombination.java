@@ -26,25 +26,11 @@ public class EdgeRecombination implements Crossover{
     public Path[] crossover(Path firstParent, Path secondParent){
         Path[] child = new Path[1];
         int[] childPath;
-//        System.out.println("NEW : ==================================");
-//        firstParent.printOrder();
-//        secondParent.printOrder();
-        /*
-        numOfCities = 10;
-        int[] order1 = {0,1,2,3,4,5,6,8,7,9,0};
-        int[] order2 = {2,5,0,9,7,3,8,6,1,4,2};
-        Path p1 = new Path(order1, 0);
-        Path p2 = new Path(order2, 0);;
 
-        firstParent = p1;
-        secondParent = p2;
-        */
         // City 별로 link 나누기
         edgeTable.clear();
         edgeTable = makeEdgeTable(firstParent, secondParent);
         saveUsed.clear();
-
-        //       printEdgeTable();
 
 
         // 시작점과 link된 것들중 가장 적은 link를 보유하는 것을 다음 path로
@@ -53,10 +39,8 @@ public class EdgeRecombination implements Crossover{
 
         // 자식값 반환
         Path childTemp = new Path(childPath, 0);
-//        childTemp.write();
         childTemp.refreshCost();
         child[0]=childTemp;
-
 
         return child;
     }
@@ -123,7 +107,6 @@ public class EdgeRecombination implements Crossover{
         // 첫 path가 link된곳을 지움
         HashSet<Integer> first = edgeTable.get(childPath[0]);
 
-//        printEdgeTable();
 
         for(int i=1; i<numOfCities; i++){
             int leastCity=-1;
@@ -153,18 +136,14 @@ public class EdgeRecombination implements Crossover{
             childPath[i] = leastCity;
             saveUsed.add(leastCity);
             Path p = new Path(childPath, 0);
-            //           p.printOrder();
-            //           System.out.println("size : "+(i+1));
             edgeTable.get(childPath[i-1]).clear();
 
         }
         childPath[numOfCities] = childPath[0];
-        System.out.println("USed : "+saveUsed.size());
         return childPath;
     }
 
     private void deleteCityInLinks(int city){
-//        System.out.println("없애고싶은 city " +city);
         if(!edgeTable.get(city).isEmpty()) {
             Iterator<Integer> itr = edgeTable.get(city).iterator();
             int cityHas;
@@ -173,14 +152,12 @@ public class EdgeRecombination implements Crossover{
                 edgeTable.get(cityHas).remove(city);
             }
         }
-        //       printEdgeTable();
     }
 
     private int getLeastLinked(){
         int leastLinked =-1;
         int leastSize = 99999;
         for(int i=0; i<edgeTable.size(); i++){
-            //!edgeTable.get(i+1).isEmpty()
             if(!saveUsed.contains(i+1)){
                 if(leastSize>edgeTable.get(i+1).size()){
                     leastLinked = i+1;
