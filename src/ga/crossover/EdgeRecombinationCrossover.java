@@ -6,22 +6,6 @@ import java.util.*;
 
 public class EdgeRecombinationCrossover implements Crossover {
 
-    public static void main(String... args) {
-        EdgeRecombinationCrossover e = new EdgeRecombinationCrossover();
-        int[] firstOrder = {0, 1, 2, 3, 4, 5, 6, 8, 7, 9, 0};
-        Path firstParent = new Path(firstOrder, 0);
-        int[] secondOrder = {2, 5, 0, 9, 7, 3, 8, 6, 1, 4, 2};
-        Path secondParent = new Path(secondOrder, 0);
-        int[] childrenOrder = e.combine(firstParent.order, secondParent.order);
-
-        // for debug
-        System.out.println();
-        for(int i : childrenOrder) {
-            System.out.print(i + ", ");
-        }
-
-    }
-
     @Override
     public Path[] crossover(Path firstParent, Path secondParent) {
         int[] childrenOrder = combine(firstParent.order, secondParent.order);
@@ -73,16 +57,6 @@ public class EdgeRecombinationCrossover implements Crossover {
             }
             adjacencySet.add(order2[i + 1]);
         }
-
-        // delete this, for checking adjacencyMap
-        // for(Integer i : adjacencyMap.keySet()) {
-        //     HashSet<Integer> adjacencySet = adjacencyMap.get(i);
-        //     System.out.print(i + " : ");
-        //     for(Integer j : adjacencySet) {
-        //         System.out.print(j + " ");
-        //     }
-        //     System.out.println();
-        // }
 
         int[] childrenOrder = new int[orderSize];
         int startCity = order1[0];
