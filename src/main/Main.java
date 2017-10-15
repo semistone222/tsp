@@ -5,6 +5,7 @@ import ga.GAmu;
 import ga.GAmu2;
 
 import ga.GeneticLocalSearch;
+import ga.crossover.EdgeRecombinationCrossover;
 import ga.crossover.PartiallyMatchedCrossover;
 import ga.initialize.RandomInitializer;
 import ga.initialize.SAInitializer;
@@ -83,17 +84,17 @@ public class Main {
         // new Chart(path7);
 
         /* GeneticLocalSearch test */
-        // GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
-        // geneticLocalSearch.setProcess(
-        //         new SAInitializer(30, 100),
-        //         new TournamentSelection(2 * 2),
-        //         new PartiallyMatchedCrossover(),
-        //         new SwapMutation(0.01),
-        //         new TabuOptimizer(0.1, 0.005, 1)
-        // );
-        //
-        // Path path8 = geneticLocalSearch.calculatePath(1);
-        // path8.printTotalCost();
+        GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+        geneticLocalSearch.setProcess(
+                new SAInitializer(30, 100),
+                new TournamentSelection(2 * 2),
+                new EdgeRecombinationCrossover(),
+                new SwapMutation(0.01),
+                new TabuOptimizer(0.1, 0.005, 1)
+        );
+
+        Path path8 = geneticLocalSearch.calculatePath(1);
+        path8.printTotalCost();
 
         /* GAmu test (4 Groups Match) */
         // GAmu gas = new GAmu();
@@ -108,15 +109,15 @@ public class Main {
         // new Chart(path8);
 
         /* GAmu2 test (4 Groups Match) */
-        GAmu2 gas = new GAmu2();
-        gas.setProcess(
-                new SAInitializer(30, 10000),
-                new TournamentSelection(2 * 2 * 2 * 2),
-                new PartiallyMatchedCrossover(),
-                new SwapMutation(0.01)
-        );
-        Path path8 = gas.calculatePath();
-        path8.printTotalCost();
-        new Chart(path8);
+        // GAmu2 gas = new GAmu2();
+        // gas.setProcess(
+        //         new SAInitializer(30, 10000),
+        //         new TournamentSelection(2 * 2 * 2 * 2),
+        //         new PartiallyMatchedCrossover(),
+        //         new SwapMutation(0.01)
+        // );
+        // Path path8 = gas.calculatePath();
+        // path8.printTotalCost();
+        // new Chart(path8);
     }
 }
