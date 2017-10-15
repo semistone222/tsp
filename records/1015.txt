@@ -1,0 +1,81 @@
+[Experiment on 1911_6396.txt] by semistone222
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2),
+        new EdgeRecombinationCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1, 0.005, 1)
+);
+=>
+generation : 0, time : 1.288s, cost : 8137.248957110883
+generation : 1, time : 10.178s, cost : 8125.874868923977
+generation : 2, time : 18.975s, cost : 8120.807997276272
+generation : 3, time : 27.432s, cost : 8109.419331352528
+generation : 4, time : 35.895s, cost : 8095.544642324984
+generation : 5, time : 44.263s, cost : 8072.952680655134
+generation : 6, time : 52.467s, cost : 8058.455733460981
+generation : 7, time : 61.069s, cost : 8008.300346547237
+generation : 8, time : 69.934s, cost : 7990.942581758366
+generation : 9, time : 78.561s, cost : 7964.915406782484
+generation : 10, time : 87.246s, cost : 7948.244406809855
+generation : 11, time : 95.903s, cost : 7933.554277421251
+generation : 12, time : 104.356s, cost : 7923.315618796334
+generation : 13, time : 112.746s, cost : 7913.737634860803
+======TOTAL COST======
+7891.9772035863525
+
+generation : 0, time : 1.322s, cost : 8137.248957110883
+generation : 1, time : 10.05s, cost : 8127.447830399961
+generation : 2, time : 18.294s, cost : 8114.9627456508515
+generation : 3, time : 26.549s, cost : 8093.095555751426
+generation : 4, time : 34.83s, cost : 8064.943642535489
+generation : 5, time : 44.711s, cost : 8054.300203866845
+generation : 6, time : 53.562s, cost : 8033.893575482275
+generation : 7, time : 62.252s, cost : 8025.901393637094
+generation : 8, time : 70.976s, cost : 8015.626134369359
+generation : 9, time : 79.538s, cost : 8001.694878797468
+generation : 10, time : 88.903s, cost : 7970.802615064867
+generation : 11, time : 99.755s, cost : 7935.210684263509
+generation : 12, time : 110.391s, cost : 7935.210684263509
+======TOTAL COST======
+7935.210684263509
+
+/////////////////////////////////////////////////////////////////////////////
+
+[Experiment on 2308_7219.txt] by semistone222
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1, 0.005, 1)
+);
+=> generation : 234, time : 119.649s, cost : 8363.245594665023
+
+TabuSearch tabuSearch = new TabuSearch(1 , 0.05);
+Path path5 = tabuSearch.calculatePath(map.getCenterCityId());
+path5.printOrder();
+path5.printTotalCost();
+=> 8123.823762328237
+
+[Experiment on 4355_12723.txt] by semistone222
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+        geneticLocalSearch.setProcess(
+                new SAInitializer(30, 100),
+                new TournamentSelection(2 * 2),
+                new PartiallyMatchedCrossover(),
+                new SwapMutation(0.01),
+                new TabuOptimizer(0.1, 0.005, 1)
+        );
+=> generation : 85, time : 118.343s, cost : 15756.680034012568
+
+TabuSearch tabuSearch = new TabuSearch(1 , 0.05);
+Path path5 = tabuSearch.calculatePath(map.getCenterCityId());
+path5.printOrder();
+path5.printTotalCost();
+=> 15439.043974312324

@@ -6,7 +6,17 @@ import ga.select.*;
 import ga.optimize.*;
 import ga.crossover.*;
 import ga.mutate.*;
-
+import ga.GeneticLocalSearch;
+import ga.crossover.EdgeRecombinationCrossover;
+import ga.crossover.PartiallyMatchedCrossover;
+import ga.initialize.RandomInitializer;
+import ga.initialize.SAInitializer;
+import ga.mutate.SwapMutation;
+import ga.optimize.TabuOptimizer;
+import ga.optimize.TwoOptOptimizer;
+import ga.select.TournamentSelection;
+import sa.SASearch;
+import sa.TabuSearch;
 import util.*;
 
 import java.util.Scanner;
@@ -67,29 +77,29 @@ public class Main {
         // path6.printTotalCost();
 
         /* GA test */
-        GASearch gaSearch = new GASearch(100, 100000);
-        gaSearch.setProcess(
-                new SAInitializer(30, 100),
-                new TournamentSelection(2 * 2 * 2 * 2),
-                new PartiallyMatchedCrossover(),
-                new SwapMutation(0.01)
-        );
-        Path path7 = gaSearch.calculatePath(1);
-        path7.printTotalCost();
-        new Chart(path7);
+        // GASearch gaSearch = new GASearch(100, 100000);
+        // gaSearch.setProcess(
+        //         new SAInitializer(30, 100),
+        //         new TournamentSelection(2 * 2 * 2 * 2),
+        //         new PartiallyMatchedCrossover(),
+        //         new SwapMutation(0.01)
+        // );
+        // Path path7 = gaSearch.calculatePath(1);
+        // path7.printTotalCost();
+        // new Chart(path7);
 
         /* GeneticLocalSearch test */
-        // GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
-        // geneticLocalSearch.setProcess(
-        //         new SAInitializer(30, 100),
-        //         new TournamentSelection(2 * 2),
-        //         new PartiallyMatchedCrossover(),
-        //         new SwapMutation(0.01),
-        //         new TabuOptimizer(1.0, 0.005, 10000)
-        // );
-//
-        // Path path8 = geneticLocalSearch.calculatePath(1);
-        // path8.printTotalCost();
+        GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+        geneticLocalSearch.setProcess(
+                new SAInitializer(30, 100),
+                new TournamentSelection(2 * 2),
+                new EdgeRecombinationCrossover(),
+                new SwapMutation(0.01),
+                new TabuOptimizer(0.1, 0.005, 1)
+        );
+
+        Path path8 = geneticLocalSearch.calculatePath(1);
+        path8.printTotalCost();
 
         /* GAMultiGroup test (4 Groups Match) */
         // GAMultiGroup gas = new GAMultiGroup();
@@ -110,19 +120,6 @@ public class Main {
         //         new SAInitializer(30, 10000),
         //          new TabuOptimizer(1.0, 0.005, 10000),
         //         new TournamentSelection(2 * 2 * 2 * 2),
-        //         new PartiallyMatchedCrossover(),
-        //         new SwapMutation(0.01)
-        // );
-        // Path path8 = gas.calculatePath();
-        // path8.printTotalCost();
-        // new Chart(path8);
-
-        /* GAMultiGroup3 test (4 Groups Match) */
-        // GAMultiGroup3 gas = new GAMultiGroup3();
-        // gas.setProcess(
-        //         new SAInitializer(30, 10000),
-        //         new TabuOptimizer(1.0, 0.005, 10000),
-        //         new RouletteWheelSelection(2.5),
         //         new PartiallyMatchedCrossover(),
         //         new SwapMutation(0.01)
         // );
