@@ -1,6 +1,7 @@
 package util;
 
 import ga.initialize.Initializer;
+import ga.optimize.Optimizer;
 import ga.select.Selection;
 import ga.crossover.Crossover;
 import ga.mutate.Mutation;
@@ -10,6 +11,7 @@ public abstract class GATSP {
     protected double distanceMap[][];
 
     protected Initializer initializer;
+    protected Optimizer optimizer;
     protected Selection selection;
     protected Crossover crossover;
     protected Mutation mutation;
@@ -26,6 +28,7 @@ public abstract class GATSP {
         this.distanceMap = map.getDistanceMap();
 
         this.initializer = null;
+        this.optimizer = null;
         this.selection = null;
         this.crossover = null;
         this.mutation = null;
@@ -33,8 +36,9 @@ public abstract class GATSP {
         this.generation = 0;
     }
 
-    public void setProcess(Initializer initializer, Selection selection, Crossover crossover, Mutation mutation) {
+    public void setProcess(Initializer initializer, Optimizer optimizer, Selection selection, Crossover crossover, Mutation mutation) {
         this.initializer = initializer;
+        this.optimizer = optimizer;
         this.selection = selection;
         this.crossover = crossover;
         this.mutation = mutation;

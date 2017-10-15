@@ -1,19 +1,12 @@
 package main;
 
-import ga.GASearch;
-import ga.GAmu;
-import ga.GAmu2;
+import ga.*;
+import ga.initialize.*;
+import ga.select.*;
+import ga.optimize.*;
+import ga.crossover.*;
+import ga.mutate.*;
 
-import ga.GeneticLocalSearch;
-import ga.crossover.PartiallyMatchedCrossover;
-import ga.initialize.RandomInitializer;
-import ga.initialize.SAInitializer;
-import ga.mutate.SwapMutation;
-import ga.optimize.TabuOptimizer;
-import ga.optimize.TwoOptOptimizer;
-import ga.select.TournamentSelection;
-import sa.SASearch;
-import sa.TabuSearch;
 import util.*;
 
 import java.util.Scanner;
@@ -28,7 +21,10 @@ public class Main {
         System.out.print("filename [type|enter] : ");
         String fileName = sc.nextLine();
         sc.close();
-        if (fileName.equals("")) fileName = "1911_6396.txt";
+        if (fileName.equals("")) {
+            System.out.println("[default]");
+            fileName = "1911_6396.txt";
+        }
         Map.setMapFile("data/" + fileName);
         Map map = Map.getInstance();
         // map.printCityHashMap();
@@ -71,16 +67,16 @@ public class Main {
         // path6.printTotalCost();
 
         /* GA test */
-        // GASearch gaSearch = new GASearch(100, 100000);
-        // gaSearch.setProcess(
-        //         new SAInitializer(30, 10000),
-        //         new TournamentSelection(2 * 2 * 2 * 2),
-        //         new PartiallyMatchedCrossover(),
-        //         new SwapMutation(0.01)
-        // );
-        // Path path7 = gaSearch.calculatePath(1);
-        // path7.printTotalCost();
-        // new Chart(path7);
+        GASearch gaSearch = new GASearch(100, 100000);
+        gaSearch.setProcess(
+                new SAInitializer(30, 100),
+                new TournamentSelection(2 * 2 * 2 * 2),
+                new PartiallyMatchedCrossover(),
+                new SwapMutation(0.01)
+        );
+        Path path7 = gaSearch.calculatePath(1);
+        path7.printTotalCost();
+        new Chart(path7);
 
         /* GeneticLocalSearch test */
         // GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
@@ -89,16 +85,17 @@ public class Main {
         //         new TournamentSelection(2 * 2),
         //         new PartiallyMatchedCrossover(),
         //         new SwapMutation(0.01),
-        //         new TabuOptimizer(0.1, 0.005, 1)
+        //         new TabuOptimizer(1.0, 0.005, 10000)
         // );
-        //
+//
         // Path path8 = geneticLocalSearch.calculatePath(1);
         // path8.printTotalCost();
 
-        /* GAmu test (4 Groups Match) */
-        // GAmu gas = new GAmu();
+        /* GAMultiGroup test (4 Groups Match) */
+        // GAMultiGroup gas = new GAMultiGroup();
         // gas.setProcess(
         //         new SAInitializer(30, 10000),
+        //         new TabuOptimizer(1.0, 0.005, 10000),
         //         new TournamentSelection(2 * 2 * 2 * 2),
         //         new PartiallyMatchedCrossover(),
         //         new SwapMutation(0.01)
@@ -107,16 +104,30 @@ public class Main {
         // path8.printTotalCost();
         // new Chart(path8);
 
-        /* GAmu2 test (4 Groups Match) */
-        GAmu2 gas = new GAmu2();
-        gas.setProcess(
-                new SAInitializer(30, 10000),
-                new TournamentSelection(2 * 2 * 2 * 2),
-                new PartiallyMatchedCrossover(),
-                new SwapMutation(0.01)
-        );
-        Path path8 = gas.calculatePath();
-        path8.printTotalCost();
-        new Chart(path8);
+        /* GAMultiGroup2 test (4 Groups Match) */
+        // GAMultiGroup2 gas = new GAMultiGroup2();
+        // gas.setProcess(
+        //         new SAInitializer(30, 10000),
+        //          new TabuOptimizer(1.0, 0.005, 10000),
+        //         new TournamentSelection(2 * 2 * 2 * 2),
+        //         new PartiallyMatchedCrossover(),
+        //         new SwapMutation(0.01)
+        // );
+        // Path path8 = gas.calculatePath();
+        // path8.printTotalCost();
+        // new Chart(path8);
+
+        /* GAMultiGroup3 test (4 Groups Match) */
+        // GAMultiGroup3 gas = new GAMultiGroup3();
+        // gas.setProcess(
+        //         new SAInitializer(30, 10000),
+        //         new TabuOptimizer(1.0, 0.005, 10000),
+        //         new RouletteWheelSelection(2.5),
+        //         new PartiallyMatchedCrossover(),
+        //         new SwapMutation(0.01)
+        // );
+        // Path path8 = gas.calculatePath();
+        // path8.printTotalCost();
+        // new Chart(path8);
     }
 }
