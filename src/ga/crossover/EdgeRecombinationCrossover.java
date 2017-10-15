@@ -15,7 +15,7 @@ public class EdgeRecombinationCrossover implements Crossover {
         return child;
     }
 
-    public int[] combine(int[] order1, int[] order2) {
+    private int[] combine(int[] order1, int[] order2) {
         if(order1.length != order2.length) {
             System.err.println("======CANNOT COMBINE======");
             System.exit(1);
@@ -58,14 +58,14 @@ public class EdgeRecombinationCrossover implements Crossover {
             adjacencySet.add(order2[i + 1]);
         }
 
-        int[] childrenOrder = new int[orderSize];
+        int[] retOrder = new int[orderSize];
         int startCity = order1[0];
         int currentCity = startCity;
-        int childrenOrderIdx = 0;
+        int retOrderIdx = 0;
 
-        while(childrenOrderIdx < orderSize - 1) {
+        while(retOrderIdx < orderSize - 1) {
 
-            childrenOrder[childrenOrderIdx++] = currentCity;
+            retOrder[retOrderIdx++] = currentCity;
             for(Integer i : adjacencyMap.keySet()) {
                 HashSet<Integer> adjacencySet = adjacencyMap.get(i);
                 adjacencySet.remove(currentCity);
@@ -94,8 +94,8 @@ public class EdgeRecombinationCrossover implements Crossover {
             currentCity = nextCity;
         }
 
-        childrenOrder[orderSize - 1] = startCity;
+        retOrder[orderSize - 1] = startCity;
 
-        return childrenOrder;
+        return retOrder;
     }
 }
