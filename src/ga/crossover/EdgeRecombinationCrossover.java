@@ -85,7 +85,6 @@ public class EdgeRecombinationCrossover implements Crossover {
         // }
 
         int[] childrenOrder = new int[orderSize];
-        boolean[] isVisited = new boolean[orderSize];
         int startCity = order1[0];
         int currentCity = startCity;
         int childrenOrderIdx = 0;
@@ -93,7 +92,6 @@ public class EdgeRecombinationCrossover implements Crossover {
         while(childrenOrderIdx < orderSize - 1) {
 
             childrenOrder[childrenOrderIdx++] = currentCity;
-            isVisited[currentCity] = true;
             for(Integer i : adjacencyMap.keySet()) {
                 HashSet<Integer> adjacencySet = adjacencyMap.get(i);
                 adjacencySet.remove(currentCity);
@@ -102,21 +100,19 @@ public class EdgeRecombinationCrossover implements Crossover {
             HashSet<Integer> currentAdjacencySet = adjacencyMap.get(currentCity);
 
             int nextCity = -1;
-            if(currentAdjacencySet.size() != 0) {
+            if(currentAdjacencySet != null && currentAdjacencySet.size() != 0) {
                 int min = Integer.MAX_VALUE;
                 for(Integer next : currentAdjacencySet) {
                     HashSet<Integer> nextAdjacencySet = adjacencyMap.get(next);
-                    if(min > nextAdjacencySet.size() && !isVisited[next]) {
+                    if(min > nextAdjacencySet.size()) {
                         min = nextAdjacencySet.size();
                         nextCity = next;
                     }
                 }
             } else {
                 for(Integer i : adjacencyMap.keySet()) {
-                    if(!isVisited[i]) {
-                        nextCity = i;
-                        break;
-                    }
+                    nextCity = i;
+                    break;
                 }
             }
 
