@@ -10,6 +10,7 @@ import util.PathComparatorAscCost;
 import util.TSP;
 import util.Timer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GeneticLocalSearch extends TSP {
@@ -67,24 +68,23 @@ public class GeneticLocalSearch extends TSP {
                 );
             }
 
-            int childrenIdx = 0;
-            int childrenSize = populationSize / 2;
-            Path[] children = new Path[childrenSize];
-
-            while (childrenIdx < childrenSize) {
+            ArrayList<Path> children = new ArrayList<>();
+            int childrenMaxSize = populationSize / 2;
+            while (children.size() < childrenMaxSize) {
                 int[] parentsIdx = selection.select(population);
                 Path[] child = crossover.crossover(population[parentsIdx[0]], population[parentsIdx[1]]);
                 for (int i = 0; i < child.length; i++) {
                     child[i] = optimizer.optimize(child[i]);
                     mutation.mutate(child[i]);
                     child[i] = optimizer.optimize(child[i]);
-                    children[childrenIdx++] = child[i];
+                    children.add(child[i]);
                 }
             }
 
-            for(int p = populationSize - 1, c = 0; c < childrenSize; p--, c++) {
-                population[p] = children[c];
+            for(int p = populationSize - 1, c = 0; c < children.size(); p--, c++) {
+                population[p] = children.get(c);
             }
+
             currentGeneration++;
         }
         Arrays.sort(population, asc);
