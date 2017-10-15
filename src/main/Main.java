@@ -1,9 +1,11 @@
 package main;
 
-import ga.GASearch;
-import ga.GAmu;
-import ga.GAmu2;
-
+import ga.*;
+import ga.initialize.*;
+import ga.select.*;
+import ga.optimize.*;
+import ga.crossover.*;
+import ga.mutate.*;
 import ga.GeneticLocalSearch;
 import ga.crossover.EdgeRecombinationCrossover;
 import ga.crossover.PartiallyMatchedCrossover;
@@ -29,7 +31,10 @@ public class Main {
         System.out.print("filename [type|enter] : ");
         String fileName = sc.nextLine();
         sc.close();
-        if (fileName.equals("")) fileName = "1911_6396.txt";
+        if (fileName.equals("")) {
+            System.out.println("[default]");
+            fileName = "1911_6396.txt";
+        }
         Map.setMapFile("data/" + fileName);
         Map map = Map.getInstance();
         // map.printCityHashMap();
@@ -74,7 +79,7 @@ public class Main {
         /* GA test */
         // GASearch gaSearch = new GASearch(100, 100000);
         // gaSearch.setProcess(
-        //         new SAInitializer(30, 10000),
+        //         new SAInitializer(30, 100),
         //         new TournamentSelection(2 * 2 * 2 * 2),
         //         new PartiallyMatchedCrossover(),
         //         new SwapMutation(0.01)
@@ -96,10 +101,11 @@ public class Main {
         Path path8 = geneticLocalSearch.calculatePath(1);
         path8.printTotalCost();
 
-        /* GAmu test (4 Groups Match) */
-        // GAmu gas = new GAmu();
+        /* GAMultiGroup test (4 Groups Match) */
+        // GAMultiGroup gas = new GAMultiGroup();
         // gas.setProcess(
         //         new SAInitializer(30, 10000),
+        //         new TabuOptimizer(1.0, 0.005, 10000),
         //         new TournamentSelection(2 * 2 * 2 * 2),
         //         new PartiallyMatchedCrossover(),
         //         new SwapMutation(0.01)
@@ -108,10 +114,11 @@ public class Main {
         // path8.printTotalCost();
         // new Chart(path8);
 
-        /* GAmu2 test (4 Groups Match) */
-        // GAmu2 gas = new GAmu2();
+        /* GAMultiGroup2 test (4 Groups Match) */
+        // GAMultiGroup2 gas = new GAMultiGroup2();
         // gas.setProcess(
         //         new SAInitializer(30, 10000),
+        //          new TabuOptimizer(1.0, 0.005, 10000),
         //         new TournamentSelection(2 * 2 * 2 * 2),
         //         new PartiallyMatchedCrossover(),
         //         new SwapMutation(0.01)

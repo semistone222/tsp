@@ -11,9 +11,9 @@ public class Memo {
     private ArrayList<Integer> memo;
     public Memo(String st){ memo = new ArrayList<>(); info = st; }
     public void doMemo (int val) { memo.add(val); }
-    public void saveMemo () {
+    private void _saveMemoWithName (String filename) {
         try {
-            FileWriter fw = new FileWriter("costs.txt", true);
+            FileWriter fw = new FileWriter(filename, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw);
             out.print(info);
@@ -28,5 +28,13 @@ public class Memo {
         } catch (IOException e) {
             System.exit(1);
         }
+    }
+    public void saveMemo () {
+        _saveMemoWithName("costs.txt");
+    }
+    public void savePath (Path ipath) {
+        memo.clear();
+        for (int i = 0; i < ipath.order.length; i++) memo.add(ipath.order[i]);
+        _saveMemoWithName("path.txt");
     }
 }
