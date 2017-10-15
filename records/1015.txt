@@ -41,3 +41,41 @@ generation : 11, time : 99.755s, cost : 7935.210684263509
 generation : 12, time : 110.391s, cost : 7935.210684263509
 ======TOTAL COST======
 7935.210684263509
+
+/////////////////////////////////////////////////////////////////////////////
+
+[Experiment on 2308_7219.txt] by semistone222
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+geneticLocalSearch.setProcess(
+        new SAInitializer(30, 100),
+        new TournamentSelection(2 * 2),
+        new PartiallyMatchedCrossover(),
+        new SwapMutation(0.01),
+        new TabuOptimizer(0.1, 0.005, 1)
+);
+=> generation : 234, time : 119.649s, cost : 8363.245594665023
+
+TabuSearch tabuSearch = new TabuSearch(1 , 0.05);
+Path path5 = tabuSearch.calculatePath(map.getCenterCityId());
+path5.printOrder();
+path5.printTotalCost();
+=> 8123.823762328237
+
+[Experiment on 4355_12723.txt] by semistone222
+
+GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+        geneticLocalSearch.setProcess(
+                new SAInitializer(30, 100),
+                new TournamentSelection(2 * 2),
+                new PartiallyMatchedCrossover(),
+                new SwapMutation(0.01),
+                new TabuOptimizer(0.1, 0.005, 1)
+        );
+=> generation : 85, time : 118.343s, cost : 15756.680034012568
+
+TabuSearch tabuSearch = new TabuSearch(1 , 0.05);
+Path path5 = tabuSearch.calculatePath(map.getCenterCityId());
+path5.printOrder();
+path5.printTotalCost();
+=> 15439.043974312324
