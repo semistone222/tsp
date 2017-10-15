@@ -57,10 +57,7 @@ public class RouletteWheelSelection implements Selection {
 
     /**
      * get fitness of solution i
-     * @param Cw cost of worst solution in solution set
-     * @param Cb cost of best solution in solution set
      * @param Ci cost of solution i
-     * @param k constant, should be larger than 1. generally, a value of 3 to 4 is used.
      * @return fitness of solution i
      */
     private double fi(double Ci) {
