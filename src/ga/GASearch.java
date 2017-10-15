@@ -90,13 +90,13 @@ public class GASearch extends TSP {
                 // crossover to make child
                 Path[] child = this.crossover.crossover(population[parentsIdx[0]], population[parentsIdx[1]]);
 
-                // mutate child with low probability
-                this.mutation.mutate(child[0]);
-                this.mutation.mutate(child[1]);
-
-                // replace two worst solution with new child
-                this.population[populationSize - replaceIdx++] = child[0];
-                this.population[populationSize - replaceIdx++] = child[1];
+                // each children
+                for(int i = 0; i < child.length; i++) {
+                    // mutate children with low probability
+                    this.mutation.mutate(child[i]);
+                    // replace worst solution with new children
+                    population[populationSize - replaceIdx++] = child[i];
+                }
             }
 
             currentGeneration++;
