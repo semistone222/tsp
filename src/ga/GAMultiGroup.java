@@ -6,7 +6,7 @@ import util.*;
 
 import java.util.Arrays;
 
-public class GAmu extends GATSP{
+public class GAMultiGroup extends GATSP{
     @Override
     public Path calculatePath() {
         /* stage 1

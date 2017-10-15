@@ -4,7 +4,7 @@ import greedy.NearestNeighbor;
 import sa.TabuSearch;
 import util.*;
 
-public class GAmu2 extends GATSP {
+public class GAMultiGroup2 extends GATSP {
     @Override
     public Path calculatePath() {
         timer.tic();

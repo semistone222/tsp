@@ -1,4 +1,3 @@
-
 package ga.crossover;
 
 import util.Map;
