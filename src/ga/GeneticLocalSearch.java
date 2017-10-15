@@ -55,7 +55,7 @@ public class GeneticLocalSearch extends TSP {
         PathComparatorAscCost asc = new PathComparatorAscCost();
 
         int currentGeneration = 0;
-        while(currentGeneration < generationSize && !timer.isOver(Timer.SECOND_DEMO_LIMIT_SEC)) {
+        while (currentGeneration < generationSize && !timer.isOver(Timer.SECOND_DEMO_LIMIT_SEC)) {
             Arrays.sort(this.population, asc);
 
             // for debug
@@ -67,16 +67,23 @@ public class GeneticLocalSearch extends TSP {
                 );
             }
 
-            int replaceIdx = 1;
-            while(replaceIdx < (populationSize / 2)) {
+            int childrenIdx = 0;
+            int childrenSize = populationSize / 2;
+            Path[] children = new Path[childrenSize];
+
+            while (childrenIdx < childrenSize) {
                 int[] parentsIdx = selection.select(population);
                 Path[] child = crossover.crossover(population[parentsIdx[0]], population[parentsIdx[1]]);
-                for(int i = 0; i < child.length; i++) {
+                for (int i = 0; i < child.length; i++) {
                     child[i] = optimizer.optimize(child[i]);
                     mutation.mutate(child[i]);
                     child[i] = optimizer.optimize(child[i]);
-                    population[populationSize - replaceIdx++] = child[i];
+                    children[childrenIdx++] = child[i];
                 }
+            }
+
+            for(int p = populationSize - 1, c = 0; c < childrenSize; p--, c++) {
+                population[p] = children[c];
             }
             currentGeneration++;
         }
