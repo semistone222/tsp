@@ -5,14 +5,14 @@ import sa.TabuSearch;
 import util.*;
 
 import java.util.Arrays;
-
+@Deprecated
 public class GAMultiGroup extends GATSP{
     @Override
     public Path calculatePath() {
         /* stage 1
          * Nearest 5 Path */
         // TODO if start point is different, crossover occurs error
-        int randNum[] = Pick.randNums(5, this.numOfCities);
+        int randNum[] = Pick.randCities(5);
         Path start5path[] = new Path[5];
         NearestNeighbor nearestNeighbor = new NearestNeighbor();
         for (int i = 0; i < 5; i++) {

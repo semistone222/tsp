@@ -3,7 +3,7 @@ package ga;
 import greedy.NearestNeighbor;
 import sa.TabuSearch;
 import util.*;
-
+@Deprecated
 public class GAMultiGroup2 extends GATSP {
     @Override
     public Path calculatePath() {
