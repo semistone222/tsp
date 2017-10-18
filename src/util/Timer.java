@@ -26,4 +26,8 @@ public class Timer {
         }
         return false;
     }
+
+    private static long worldBegin;
+    public static void begin() { worldBegin = System.currentTimeMillis(); }
+    public void synchronize() { startTime = worldBegin; }
 }

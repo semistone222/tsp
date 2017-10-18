@@ -10,21 +10,22 @@ import java.util.*;
 
 public class Path {
 
-    private double[][] distanceMap;
+    private static double[][] distanceMap;
+    public static void setMapData() {
+        distanceMap = Map.getInstance().getDistanceMap();
+    }
 
     public int[] order;
     public double totalCost;
     public Pair<Integer, Integer> recentlySwappedPair;
 
     public Path(int[] order, double totalCost) {
-        this.distanceMap = Map.getInstance().getDistanceMap();
         this.order = order;
         this.totalCost = totalCost;
         this.recentlySwappedPair = new Pair<>(null, null);
     }
 
     public Path(int[] order, double totalCost, Pair<Integer, Integer> pair) {
-        this.distanceMap = Map.getInstance().getDistanceMap();
         this.order = order;
         this.totalCost = totalCost;
         this.recentlySwappedPair = new Pair<>(pair.getKey(), pair.getValue());
@@ -184,6 +185,13 @@ public class Path {
         return path;
     }
 
+    // COST와 ORDER 복사
+    public Path copyValue() {
+        int[] copiedOrder = new int[order.length];
+        System.arraycopy(order, 0, copiedOrder, 0, order.length);
+        return new Path(copiedOrder, totalCost);
+    }
+
     public void printOrder() {
         System.out.println("======PATH ORDER======");
         for(int i = 0; i < order.length; i++) {
@@ -253,6 +261,117 @@ public class Path {
 
         System.arraycopy(seven[minIdx].order, 0, order, 0, order.length);
         totalCost = minCost;
+    }
+
+    /**
+     * caseThreeOpt
+     * 신속한 3opt를 하면서 2opt 중복은 빼고,
+     * 모두 경로를 바꿔보는게 아니라
+     * Cost만 먼저 계산해보고 나중에 가장 낮은 cost로 경로변경을 시행해서
+     * 속도를 높이고자 하였습니다
+     */
+    public void caseThreeOpt(int firstIdx, int secondIdx, int thirdIdx) {
+        if (firstIdx > secondIdx || thirdIdx > secondIdx) {
+            System.err.println("climbThreeOptCost, idx not sort");
+            System.exit(0);
+        }
+        if (firstIdx < 0 || thirdIdx >= order.length - 1) {
+            System.err.println("climbThreeOptCost, out of array index");
+            System.exit(0);
+        }
+        /* type
+        * DEFAULT AB-1-CD-2-EF-3-GA
+        * X : ABCD[FE]GA
+        * 0 : AB[DC][FE]GA
+        * X : AB[DC]EFGA
+        *
+        * X : AB[FE][DC]GA
+        * 1 : AB[FE][CD]GA
+        * 2 : AB[EF][CD]GA
+        * 3 : AB[EF][DC]GA
+        */
+        // 시티맵의 범위는 [1, MAX]
+        // 인덱스 구성은 0(start) : MAX-1(last) : MAX(start) 로 되어있음
+        // 즉, 인덱스 범위는 엣지로 구성되므로 [0, MAX-1] 임
+        int B = order[firstIdx];
+        int C = order[firstIdx + 1];
+        int D = order[secondIdx];
+        int E = order[secondIdx + 1];
+        int F = order[thirdIdx];
+        int G = order[thirdIdx + 1];
+
+        double candidate[] = new double[5];
+        candidate[4] = this.totalCost
+                - distanceMap[B][C]
+                - distanceMap[D][E]
+                - distanceMap[F][G];
+        // 0 : AB[DC][FE]GA
+        candidate[0] = candidate[4]
+                + distanceMap[B][D]
+                + distanceMap[C][F]
+                + distanceMap[E][G];
+        // 1 : AB[FE][CD]GA
+        candidate[1] = candidate[4]
+                + distanceMap[B][F]
+                + distanceMap[E][C]
+                + distanceMap[D][G];
+        // 2 : AB[EF][CD]GA
+        candidate[2] = candidate[4]
+                + distanceMap[B][E]
+                + distanceMap[F][C]
+                + distanceMap[D][G];
+        // 3 : AB[EF][DC]GA
+        candidate[3] = candidate[4]
+                + distanceMap[B][E]
+                + distanceMap[F][D]
+                + distanceMap[C][G];
+
+        int ret = 4;
+        for(int i = 0; i < 4; i++)
+            if(candidate[ret] > candidate[i])
+                ret = i;
+
+        if (ret == 4) return;
+
+        int bdx = firstIdx;
+        int cdx = firstIdx + 1;
+        int ddx = secondIdx;
+        int edx = secondIdx + 1;
+        int fdx = thirdIdx;
+        int gdx = thirdIdx + 1;
+        int newOrder[] = new int[order.length];
+
+        // DEFAULT AB-1-CD-2-EF-3-GA
+        for (int i = 0; i <= bdx; i++) newOrder[i] = order[i];
+        for (int i = gdx; i < order.length; i++) newOrder[i] = order[i];
+        switch (ret) {
+            case 0:
+                // 0 : AB[DC][FE]GA
+                for (int i = 0; i <= ddx - cdx; i++) newOrder[cdx + i] = order[ddx - i];
+                for (int i = 0; i <= fdx - edx; i++) newOrder[edx + i] = order[fdx - i];
+                totalCost = candidate[ret];
+                break;
+            case 1:
+                // 1 : AB[FE][CD]GA
+                for (int i = 0; i <= ddx - cdx; i++) newOrder[cdx + i] = order[fdx - i];
+                for (int i = 0; i <= fdx - edx; i++) newOrder[edx + i] = order[cdx + i];
+                totalCost = candidate[ret];
+                break;
+            case 2:
+                // 2 : AB[EF][CD]GA
+                for (int i = 0; i <= ddx - cdx; i++) newOrder[cdx + i] = order[edx + i];
+                for (int i = 0; i <= fdx - edx; i++) newOrder[edx + i] = order[cdx + i];
+                totalCost = candidate[ret];
+                break;
+            case 3:
+                // 3 : AB[EF][DC]GA
+                for (int i = 0; i <= ddx - cdx; i++) newOrder[cdx + i] = order[edx + i];
+                for (int i = 0; i <= fdx - edx; i++) newOrder[edx + i] = order[ddx - i];
+                totalCost = candidate[ret];
+                break;
+            default:
+        }
+
     }
 
     public PathState checkState() {

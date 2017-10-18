@@ -16,6 +16,7 @@ public class Map {
 
     public static void setMapFile(String fileName) {
         instance = new Map(fileName);
+        Path.setMapData();
     }
 
     public static Map getInstance() {

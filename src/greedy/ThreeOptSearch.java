@@ -33,7 +33,7 @@ public class ThreeOptSearch extends TSP {
         while(trial < limitTrial && !timer.isOver(Timer.FIRST_DEMO_LIMIT_SEC)) {
             trialPath = minPath.deepCopy();
 
-            int [] randNums = Pick.randNums(3, numOfCities );
+            int [] randNums = Pick.randIdx(3);
             trialPath.threeOptSwap(randNums[0], randNums[1], randNums[2]);
 
             if(minPath.totalCost > trialPath.totalCost) {

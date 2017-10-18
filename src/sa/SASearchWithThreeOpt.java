@@ -49,14 +49,14 @@ public class SASearchWithThreeOpt extends TSP {
             //최저에서 아무거나 바꿔본다 <min에서 rand 생성!>
             RandPath = minPath.deepCopy();
             for(int i = 0 ; i < 3; i++) {
-                randNums = Pick.randNums(3, numOfCities);
+                randNums = Pick.randIdx(3);
                 RandPath.threeOptSwap(randNums[0], randNums[1], randNums[2]);
             }
 
             //바꾼 값을 열심히 최적화 해본다 <trial로 rand를 열심히 최적화!>
             for (int i = 0; i < numOfIteration; i++) {
                 trialPath = RandPath.deepCopy();
-                randNums = Pick.randNums(3, numOfCities);
+                randNums = Pick.randCities(3, numOfCities);
                 trialPath.threeOptSwap(randNums[0], randNums[1], randNums[2]);
 
                 if (RandPath.totalCost > trialPath.totalCost) RandPath = trialPath.deepCopy();
