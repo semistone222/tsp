@@ -25,7 +25,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String... args) {
-        Timer.begin();
         String defaultFileName = "1911_6396.txt";
 
         // read file
@@ -39,6 +38,8 @@ public class Main {
             System.out.println("[select default data]");
             fileName = defaultFileName;
         }
+
+        Timer.begin();
         Map.setMapFile("data/" + fileName);
         Map map = Map.getInstance();
 
@@ -66,16 +67,22 @@ public class Main {
         // new Chart(path7);
 
         /* GeneticLocalSearch test */
-        GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
-        geneticLocalSearch.setProcess(
-             new SAInitializer(30, 100),
-             new RouletteWheelSelection(2.0d),
-             new EdgeRecombination(),
-             new SwapMutation(0.1),
-             new TwoOptOptimizer(10)
-        );
+        //GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+        //geneticLocalSearch.setProcess(
+        //     new SAInitializer(30, 100),
+        //     new RouletteWheelSelection(2.0d),
+        //     new EdgeRecombination(),
+        //     new SwapMutation(0.1),
+        //     new TwoOptOptimizer(10)
+        //);
+        //
+        //Path path8 = geneticLocalSearch.calculatePath(1);
+        //path8.printTotalCost();
 
-        Path path8 = geneticLocalSearch.calculatePath(1);
-        path8.printTotalCost();
+        /* GATest */
+        GATest gaTest = new GATest();
+        Path gaTestPath = gaTest.calculatePath();
+        gaTestPath.printState();
+        gaTestPath.printTotalCost();
     }
 }

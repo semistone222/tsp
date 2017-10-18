@@ -271,7 +271,7 @@ public class Path {
      * 속도를 높이고자 하였습니다
      */
     public void caseThreeOpt(int firstIdx, int secondIdx, int thirdIdx) {
-        if (firstIdx > secondIdx || thirdIdx > secondIdx) {
+        if (secondIdx < firstIdx || thirdIdx < secondIdx) {
             System.err.println("climbThreeOptCost, idx not sort");
             System.exit(0);
         }
