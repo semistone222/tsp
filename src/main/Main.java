@@ -90,17 +90,28 @@ public class Main {
         // new Chart(path7);
 
         /* GeneticLocalSearch test */
-        GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
-        geneticLocalSearch.setProcess(
+        // GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000, 90);
+        // geneticLocalSearch.setProcess(
+        //         new SAInitializer(30, 100),
+        //         new RouletteWheelSelection(3.5),
+        //         new PartiallyMatchedCrossover(),
+        //         new SwapMutation(0.01),
+        //         new TabuOptimizer(0.1, 0.005, 1)
+        // );
+
+        // Path path8 = geneticLocalSearch.calculatePath(1);
+        // path8.printTotalCost();
+
+        SimulatedAnnealingGeneticLocalSearch simulatedAnnealingGeneticLocalSearch = new SimulatedAnnealingGeneticLocalSearch(100, 10000, 90);
+        simulatedAnnealingGeneticLocalSearch.setProcess(
                 new SAInitializer(30, 100),
-                new TournamentSelection(2 * 2),
-//                new EdgeRecombinationCrossover(),
-                new EdgeRecombination(),
+                new RouletteWheelSelection(3.5),
+                new PartiallyMatchedCrossover(),
                 new SwapMutation(0.01),
                 new TabuOptimizer(0.1, 0.005, 1)
         );
 
-        Path path8 = geneticLocalSearch.calculatePath(1);
+        Path path8 = simulatedAnnealingGeneticLocalSearch.calculatePath(1);
         path8.printTotalCost();
 
         /* GAMultiGroup test (4 Groups Match) */
