@@ -176,20 +176,8 @@ public class Path {
 
     public Path deepCopy() {
         int[] copiedOrder = new int[order.length];
-        for(int i = 0; i < order.length; i++) {
-            copiedOrder[i] = order[i];
-        }
-
-        Path path = new Path(copiedOrder, totalCost, recentlySwappedPair);
-
-        return path;
-    }
-
-    // COST와 ORDER 복사
-    public Path copyValue() {
-        int[] copiedOrder = new int[order.length];
         System.arraycopy(order, 0, copiedOrder, 0, order.length);
-        return new Path(copiedOrder, totalCost);
+        return new Path(copiedOrder, totalCost, recentlySwappedPair);
     }
 
     public void printOrder() {
@@ -465,4 +453,25 @@ public class Path {
 
         return randomPath;
     }
+
+    // 으 - 악
+    public void LinKernighan() {
+        //G* 는 0
+        //t1을 잡는다
+        //t1과 인접한점 x1을 만든다
+   }
+
+   public void changeStartPoint(int startID) {
+        if (order[0] == startID) return;
+
+        int i;
+        for (i = 1; i < (order.length - 1); i++)
+            if (order[i] == startID) break;
+
+        int newOrder[] = new int[order.length];
+        newOrder[0] = newOrder[order.length - 1] = startID;
+        System.arraycopy(order, i, newOrder, 0, order.length - 1 - i);
+        System.arraycopy(order, 0, newOrder, order.length - 1 - i, i + 1);
+        System.arraycopy(newOrder, 0, order, 0, order.length);
+   }
 }

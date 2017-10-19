@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class SwapMutation implements Mutation {
 
-    private final double threshold;
+    public double threshold;
     private final int numOfCities;
 
     /**

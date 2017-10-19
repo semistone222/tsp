@@ -25,10 +25,27 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String... args) {
-        String defaultFileName = "1911_6396.txt";
+        new DataChart();
+        String input;
+        String defaultFileName;
 
-        // read file
         Scanner sc = new Scanner(System.in);
+        System.out.print("Configuration... chosee default data sets [1|2|3] : ");
+        input = sc.nextLine();
+        int choice = Integer.parseInt(input);
+        switch (choice){
+            case 3:
+                defaultFileName = "9698_27724.txt";
+                break;
+            case 2:
+                defaultFileName = "4355_12723.txt";
+                break;
+            case 1:
+            default:
+                defaultFileName = "1911_6396.txt";
+        }
+        System.out.println(input + " select [ " + defaultFileName + " ]");
+
         System.out.println("Request input data_name in 'data' folder ex>662.txt");
         System.out.println("blank occurs default data (" + defaultFileName + ")");
         System.out.print("filename [type|enter] : ");
@@ -67,22 +84,19 @@ public class Main {
         // new Chart(path7);
 
         /* GeneticLocalSearch test */
-        //GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
-        //geneticLocalSearch.setProcess(
-        //     new SAInitializer(30, 100),
-        //     new RouletteWheelSelection(2.0d),
-        //     new EdgeRecombination(),
-        //     new SwapMutation(0.1),
-        //     new TwoOptOptimizer(10)
-        //);
-        //
-        //Path path8 = geneticLocalSearch.calculatePath(1);
-        //path8.printTotalCost();
+        GeneticLocalSearch geneticLocalSearch = new GeneticLocalSearch(100, 10000);
+        Path path8 = geneticLocalSearch.calculatePath(1);
+        path8.printState();
+        path8.printTotalCost();
+        new DataChart();
+        new Chart(path8);
 
         /* GATest */
-        GATest gaTest = new GATest();
-        Path gaTestPath = gaTest.calculatePath();
-        gaTestPath.printState();
-        gaTestPath.printTotalCost();
+        //GATest gaTest = new GATest();
+        //Path gaTestPath = gaTest.calculatePath();
+        //gaTestPath.printState();
+        //gaTestPath.printTotalCost();
+        //new DataChart();
+        //new Chart(gaTestPath);
     }
 }

@@ -159,22 +159,19 @@ public class RouletteWheelSelection implements Selection {
      *  리스트 생성해서 초기화 하는 함수!
      *  unique 선택전 호출 필요
      */
-    public void setSpinTable(Path[] population) {
+    public void setSpinTable() {
         // 반드시 오름차순으로 정렬 되어있을것
-        _select(population, 0);
+        if (spinTablePDF == null) {
+            System.err.println("=====RouteWheel : setSpinTable : makePDF first=====");
+            System.exit(1);
+        }
         uniqueTable = new ArrayList<>();
-        for (int i = 0; i < population.length; i++)
+        for (int i = 0; i < spinTablePDF.length; i++)
             uniqueTable.add(new Pair<>(i, spinTablePDF[i]));
     }
 
-
-
-
-
-
-
-
-
-
+    public void makePDF(Path[] population) {
+        _select(population, 0);
+    }
 
 }
